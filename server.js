@@ -20,7 +20,7 @@ app.listen(3000, function(){
 });
 
 // ROUTES
-// NOTE: These routes are NOT YET PROPERLY IMPLEMENTED 
+// NOTE: These routes are TENTATIVE
 //          1. Must be in Routes folder
 //          2. Must use the appropriate HTTP methods (get vs post)
 //          3. SOME ROUTES COULD STILL BE MISSING
