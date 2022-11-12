@@ -23,6 +23,7 @@ app.listen(3000, function(){
 // NOTE: These routes are NOT YET PROPERLY IMPLEMENTED 
 //          1. Must be in Routes folder
 //          2. Must use the appropriate HTTP methods (get vs post)
+//          3. SOME ROUTES COULD STILL BE MISSING
 app.get("/", function(req, res){
     res.render("index", {title: "Your Main Source of Fun"});
 });
