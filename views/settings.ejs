@@ -1,0 +1,83 @@
+<!-- Side Container -->
+<aside class="accSet-side">
+    <button onclick="window.history.back()">Go to Back to Previous Page</button>
+    <h2>Account Settings</h2>
+    <hr>
+    <ul>
+        <li>Personal Information</li>
+        <li>Sign In Details</li>
+        <li>User Profile</li>
+    </ul>
+</aside>
+
+<!-- Forms -->
+<div class="accSet-form-container">
+    <!-- Section 1 Container -->
+    <div class="accSet-box">
+        <div class="accSet-header">
+            <h2 id="accSetSec1">PERSONAL INFORMATION</h2>
+            <p>
+                This information is private and will not be shared with other people.
+            </p>
+        </div>
+        <div class="accSet-field">
+            <!-- TO-DO - DATABASE NEEDED:
+                1. Add ACTION and METHOD to <form>
+                2. Update database after clicking "Save Changes"         
+            -->
+            <form action="#">
+                <label><b>E-MAIL ADDRESS</b></label><br />
+                <input type="email" name="updEmail" placeholder="Update E-Mail Address. . ."><br />
+                <label><b>FULL NAME</b></label><br />
+                <input type="text" name="updName" placeholder="Update Full Name . . ."><br />
+                <button type="submit" name="updPI">Save Changes</button>
+            </form>
+        </div>
+    </div>
+    <!-- Section 2 Container-->
+    <div class="accSet-box">
+        <div class="accSet-header">
+            <h2 id="accSetSec2">SIGN IN DETAILS</h2>
+            <p>
+                We recommend that you periodically update your password to help prevent unauthorized access to your
+                account.
+            </p>
+        </div>
+        <div class="accSet-field">
+            <!-- TO-DO - DATABASE NEEDED:
+                1. Add ACTION and METHOD to <form>
+                2. Update database after clicking "Save Changes"         
+            -->
+            <form action="#">
+                <label><b>USERNAME</b></label><br />
+                <input type="email" name="updUsername" placeholder="Update Username. . ."><br />
+                <label><b>PASSWORD</b></label><br />
+                <input type="password" name="updPass" placeholder="Update Password. . ."><br />
+                <button type="submit" name="updSI">Save Changes</button>
+            </form>
+        </div>
+    </div>
+    <!-- Section 3 Container-->
+    <div class="accSet-box">
+        <div class="accSet-header">
+            <h2 id="accSetSec3">USER PROFILE</h2>
+            <p>
+                Edit your profile picture or the bio displayed on your profile page.
+            </p>
+        </div>
+        <div class="accSet-field">
+            <!-- TO-DO - DATABASE NEEDED:
+                1. Add ACTION and METHOD to <form>
+                2. Update database after clicking "Save Changes"         
+            -->
+            <form action="#">
+                <label><b>PROFILE PICTURE</b></label><br />
+                <input class="accSet-input2" type="file" name="updPfp" accept="image/png, image/jpg, image/jpeg"><br />
+                <label><b>BIOGRAPHY</b></label><br />
+                <textarea class="accSet-input3" name="updBio" rows="7px" cols="50px"></textarea><br /><br />
+                <button type="submit" name="updProf">Save Changes</button>
+            </form>
+        </div>
+    </div>
+    <br /><br />
+</div>

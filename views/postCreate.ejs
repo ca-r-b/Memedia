@@ -1,0 +1,20 @@
+<!-- Header -->
+<div class="create-header">
+    <h1>Upload your meme now!</h1>
+</div>
+
+<!-- TODO - DATABASE NEEDED: Make sure post is ADDED to database -->
+<form>
+    <div class="create-form-container">
+        <div class="create-post-title">
+            <br/>
+            <textarea name="postCaption" placeholder="Caption Here!" minlength="3" maxlength="100" rows="1px" cols="90px" required></textarea><br/><br/>
+        </div>
+        <p class="create-post-prompt">Select a meme from your files.</p>
+        <div id="create-post-content"></div>
+        <div class="create-post-upload">
+            <input id="create-post-input-content" type="file" name="postContent" accept="image/png, image/jpg, image/jpeg" required><br/>
+        </div>
+    </div>
+    <input id="create-post-upload-btn" type="submit" name="uploadPost" value="Upload Post!">
+</form>

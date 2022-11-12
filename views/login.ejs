@@ -1,0 +1,40 @@
+<div class="login-container">
+    <div class="login-info-container">
+        <img src="images/defaults/logo.png">
+        <p>YOUR MAIN SOURCE OF FUN!</p>
+    </div>
+    <div class="login-form-container">
+        <!-- Sign In Title -->
+        <div class="login-title">
+            <h1>Log In</h1>
+            <hr/>
+        </div>
+        <!-- Sign In Fields -->
+        <!-- TO-DO - DATABASE NEEDED:
+            1. Add action to <form>
+            2. Check if username and password are valid
+        -->
+        <div class="login-form">
+            <!-- TO-DO - DATABASE NEEDED: 
+                1. Replace METHOD from "get" to "post" AFTER ADDING MongoDB 
+            -->
+            <form action="home" method="get">
+                <!-- Login Input -->
+                <label for="login-username">Username</label><br/>
+                <input name="username" id="login-username" type="text" placeholder="Username"><br/>
+                <br/>
+                <!-- Password Input -->
+                <label for="login-pass">Password</label><br/>
+                <input name="password" id="login-pass" type="password" placeholder="Password"><br/>
+                <br/>
+                <!-- Submit -->
+                <button type="submit">Log In</button>
+            </form>
+        </div>
+        <!-- Registration Redirection -->
+        <div class="login-rdr">
+            <br/>
+            <p>Don't have an account yet? <a href="/register">Register here!</a></p>
+        </div>
+    </div>
+</div>

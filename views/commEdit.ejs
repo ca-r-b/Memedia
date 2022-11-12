@@ -1,0 +1,24 @@
+<div class="edit-comment-container">
+    <!-- Title -->
+    <div class="edit-comment-title">
+        <h2>EDIT YOUR COMMENT</h2>
+    </div>
+    <!-- Header -->
+    <div class="edit-comment-inside">
+        <div class="edit-comment-header">
+            <h3>Make changes with the text area below.</h3>
+        </div>
+        <br/>
+        <!-- Editor -->
+        <div class="edit-comment-form">
+            <form>
+                <textarea id="edit-comment" placeholder="Caption Here!" minlength="3" maxlength="256" rows="7px" cols="90px" required></textarea><br />
+                <br/>
+                <button id="edit-comment-save" type="submit">Save Comment</button>
+            </form>
+        </div>
+        <!-- Submit -->
+    </div>
+
+    <button id="edit-comment-cancel" onclick="history.back()">Cancel</button>
+</div>

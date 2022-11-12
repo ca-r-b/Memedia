@@ -1,0 +1,31 @@
+<div class="profile-container">
+    <div class="profile-user-container">
+        <div class="profile-header">
+            <div class="profile-header-name">
+                <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Username -->
+                <h1><b>Carlo</b></h1>
+            </div>
+            <!-- TO-DO - DATABASE NEED: If profile is User's, show "Edit Profile"; If NOT User's own profile, REMOVE "Edit Profile" -->
+            <div class="profile-header-btn">
+                <a href="settings"><button>Edit Profile</button></a>
+            </div>
+        </div>
+        <div class="profile-image">
+            <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Profile -->
+            <img src="images/devs/dev-2.jpg"/>
+        </div>
+        <div class="profile-bio">
+            <h2><b>BIOGRAPHY</b></h2>
+            <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Bio-->
+            <p>hello guys, can you all add me to your fbs lol, thank you. @snapchat here - wait can yall like subscribe to my onlyFans too LOOOLL NEED THAT MOOLAH</p>
+        </div>
+    </div>
+    <div class="profile-posts">
+        <div class="profile-posts-header">
+            <h2>Posts</h2>
+            <hr/>
+        </div>
+       <!-- TO-DO - DATABASE NEED: Make sure ALL posts of user is displayed here -->
+        <%- include("./partials/postBox.ejs") %> 
+    </div>
+</div>

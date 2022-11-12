@@ -1,0 +1,37 @@
+<!-- REPORT POST MODAL -->
+<div id="report-post-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><b>REPORT POST</b></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- TO-DO - DATABASE NEED: Add ACTION to <form>; ADD to DATABASE of REPORT POST SCHEMA-->
+            <form>
+                <div class="modal-body">
+                    <h4>Why are you reporting this post?</h4>
+                    <input name="reportType" id="report-inappropriate" type="radio">
+                    <label for="report-inappropriate">Inappropriate</label>
+                    <br/>
+                    <input name="reportType" id="report-rude" type="radio">
+                    <label for="report-rude">Rude content</label>
+                    <br/>
+                    <input name="reportType" id="report-spam" type="radio">
+                    <label for="report-spam">Spam</label>
+                    <br/>
+                    <input name="reportType" id="report-false" type="radio">
+                    <label for="report-false">False Information</label>
+                    <br/>
+                    <input name="reportType" id="report-sexual" type="radio">
+                    <label for="report-sexual">Sexual Content or Nudity</label>
+                    <br/>
+                </div>
+                <div class="modal-footer">
+                    <!-- TO-DO - Make sure buttons works -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="view-post-container">
+    <div class="view-post-user">
+        <div class="view-post-user-prof">
+            <!-- TO-DO - DATABASE NEED: REPLACE with ACTUAL image of User -->
+            <img src="images/devs/dev-1.jpg" alt="catLover's Profile Picture">
+        </div>
+        <div class="view-post-user-name">
+            <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Username -->
+            <a href="#">catLover</a>
+            <hr>
+            <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Date of Post -->
+            <p>Posted on October 10, 2022</p>
+        </div>
+    </div>
+    <hr>
+
+    <div class="view-post-title">
+        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Post Caption -->
+        <h2>When the cat is an impostor 🤨</h2>
+    </div>
+    <div class="view-post-stats">
+        <!-- GENERAL TO-DO - DATABASE + JS NEED: Add functionality 
+            1. User can only vote for 1 (e.g. Kung nag-Upvote siya then pinagchange to Downvote, mawawala Upvote niya)
+            2. Update vote count database
+            3. Add action to <form>
+        -->
+
+        <!-- ID of <form> is for CSS purposes -->
+        <!-- Note: REMOVE <form> if you think it is not necessary -->
+        <form id="post-vote-form">
+            <!-- TO-DO - DATABASE NEED: 
+                Replace ICON with "bi bi-caret-*up or down* FILLED" if CLICKED 
+                1. Add If-Else statement to check if User has voted on post
+                2. If User has voted on post, check if it is Upvote or Downvote
+                    - Make sure that Up/Downvote button's icon is changed if pressed by user
+                3. If User has voted on post, make sure yung itsura ng BUTTON [yung vinote nya] and the COUNT OF VOTES ARE UPDATED
+            -->
+            <button id="upVote">
+                <i id="post-upv" class="bi bi-caret-up"></i>
+                <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
+                <p id="post-upv-count">5</p>
+            </button>
+            <button id="downVote">
+                <i id="post-dv" class="bi bi-caret-down"></i>
+                <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
+                <p id="post-dv-count">5</p>
+            </button>
+        </form>
+        <!-- TO-DO - ADD Check if it is OWNED by User; if OWNED by User, remove REPORT btn / Otherwise, remove DELETE btn -->
+        <button id="post-report" data-bs-toggle="modal" data-bs-target="#report-post-modal"><i class="bi bi-flag-fill"></i> Report</button>
+        <!-- TO-DO - ADD <form> + Put ACTION and METHOD for DELETE button -->
+        <button id="post-delete"><i class="bi bi-trash3-fill"></i> Delete</button>
+    </div>
+    <br />
+    <div class="view-post-content">
+        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Post Image -->
+        <img class="post-content" src="images/meme1.jpg" alt="Eyebrow Cat">
+    </div>
+    <br>
+
+    <!-- Comments Section -->
+    <div class="view-post-comment-section">
+        <div class="view-post-comment-stats">
+            <h2>Comments Section</h2>
+            <hr/>
+        </div>
+        <!-- TO-DO - DATABASE NEEDED: Check if User is LOGGED IN; Disable "Comment" button if NOT logged in -->
+        <div class="view-post-comment-add">
+            <!-- TO-DO - Add action -->
+            <form action="#">
+                <div class="input-group mb-3">
+                    <input type="text" minlength="3" maxlength="256" class="form-control" placeholder="Comment Here..." aria-label="Recipient's username" aria-describedby="button-addon2" required/>
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Comment</button>
+                </div>
+            </form>
+        </div>
+        <!-- TO-DO - DATABASE NEEDED: Get comments of post -->
+        <%- include("./partials/comment.ejs") %> 
+    </div>
+</div>

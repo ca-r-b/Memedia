@@ -1,0 +1,48 @@
+<div class="register-container">
+    <div class="register-info-container">
+        <img src="images/defaults/logo.png">
+        <p>YOUR MAIN SOURCE OF FUN!</p>
+    </div>
+    <div class="register-form-container">
+        <!-- Sign In Title -->
+        <div class="register-title">
+            <h1>Create an Account</h1>
+            <hr/>
+        </div>
+        <!-- Sign In Fields -->
+        <div class="register-form">
+            <!-- To-Do
+                1. Put Action to <form>
+                2. Put Method to <form>
+                3. Username Validation [must be Unique]
+                4. Email Validation [must be Unique]
+                5. Must be ADDED to database
+            -->
+            <form>
+                <!-- User Input -->
+                <label>Username</label><br/>
+                <input name="username" type="text" minlength="5" maxlength="15"  placeholder="*e.g. ragnar0ck" required><br/>
+                <br/>
+                <!-- Email Input -->
+                <label>Email</label><br/>
+                <input name="email" type="email" placeholder="*e.g. random321@yahoo.com" required><br/>
+                <br/>
+                <!-- Password Input -->
+                <label>Password</label><br/>
+                <input name="password" class="register-pass" type="password" placeholder="*8 - 16 characters" minlength="8" maxlength="16" required>
+                <br/><br/>
+                <!-- Confirm Password Input -->
+                <label>Confirm Password</label><br/>
+                <input name="confirmPass" class="register-pass" type="password" placeholder="*Match password" required><br/>
+                <br/>
+                <!-- Submit -->
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        <!-- Registration Redirection -->
+        <div class="register-rdr">
+            <br/>
+            <p>Already have an account yet? <a href="/login">Sign in here!</a></p>
+        </div>
+    </div>
+</div>

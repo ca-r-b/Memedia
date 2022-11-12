@@ -1,0 +1,60 @@
+<div class="post-box">
+    <div class="post-user-link">
+        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Username -->
+        <a href="#">Posted by: @catLover</a>      
+    </div>
+    <div class="post-header">
+        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Post Caption -->
+        <a href="#" class="post-caption"><h2>When the cat is an impostor 🤨</h2></a>
+    </div>
+    <div class="post-content-box">
+        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Post Image -->
+        <img class="post-content" src="images/meme1.jpg" alt="Eyebrow Cat">
+    </div>
+    <div class="post-footer">
+        <div class="post-icons">
+            
+            <!-- TO-DO - DATABASE + JS NEED: Add functionality 
+                1. User can only vote for 1 (e.g. Kung nag-Upvote siya then pinagchange to Downvote, mawawala Upvote niya)
+                2. Update vote count database
+                3. Make sure button is updated
+                4. Add action to <form> [REMOVE <form> tag if you think it is NOT necessary]
+            -->
+
+            <!-- ID of <form> is for CSS purposes -->
+            <!-- Note: REMOVE <form> if you think it is not necessary -->
+            <form id="post-vote-form"> 
+                <!-- TO-DO - DATABASE NEED: 
+                    Replace ICON with "bi bi-caret-*up or down* FILLED" if CLICKED 
+                    1. Add If-Else statement to check if User has voted on post
+                    2. If User has voted on post, check if it is Upvote or Downvote
+                        - Make sure that Up/Downvote button's icon is changed if pressed by user
+                    3. If User has voted on post, make sure yung itsura ng BUTTON [yung vinote nya] and the COUNT OF VOTES ARE UPDATED
+                -->
+                <button id="upVote">
+                    <i id="post-upv" class="bi bi-caret-up"></i>
+                    <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
+                    <p id="post-upv-count">5</p>
+                </button>
+                <button id="downVote">
+                    <i id="post-dv" class="bi bi-caret-down"></i>
+                    <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
+                    <p id="post-dv-count">5</p>
+                </button>
+            </form>
+                
+            <a class="post-comment" href="#"><button><i id="post-comment-icon" class="bi bi-chat-left-dots-fill"></i></button></a>
+            <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Comment Count -->
+            <p id="post-comments-count">2</p><p class="post-icon-indicator"> Comment/s</p>
+
+            <!-- Other buttons -->
+            <!-- TO-DO - DATABASE NEED: If NOT OWNED by User, put REPORT BUTTON; Otherwise, if OWNED by User, put DELETE BUTTON -->
+            <button name="reportPost" id="post-report" data-bs-toggle="modal" data-bs-target="#report-post-modal"><i class="bi bi-flag-fill"></i> Report</button>
+            <button name="deletePost" id="post-delete" data-bs-toggle="modal" data-bs-target="#delete-post-modal"><i class="bi bi-trash3-fill"></i> Delete</button>
+            
+            <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Date of Post -->
+            <h3 class="post-date">October 10, 2022</h3>
+        </div>
+        <hr class="post-divider">
+    </div>
+</div>
