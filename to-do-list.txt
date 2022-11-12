@@ -7,3 +7,6 @@ Missing:
 4. Search Bar Functionality
 	- Add Search Bar Page
 5. Route Controllers
+
+Notes:
+1. Add files/codes/other stuff if necessary
