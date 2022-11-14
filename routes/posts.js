@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+// TO-DO - DATABASE NEEDED: Add .post of routes
+
 router.get("/postCreate", function(req, res){
     res.render("postCreate", {title: "Post Your Meme"});
 });
