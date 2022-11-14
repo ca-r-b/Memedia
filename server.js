@@ -3,8 +3,15 @@ const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 
-// Setup MongoDB Connection [===== INCOMPLETE PA I THINK???? =====]
-mongoose.connect("mongodb://localhost:27017/memediadb", {useNewUrlParser: true});
+// Setup MongoDB Connection
+// mongoose.connect("mongodb://localhost:27017/memediadb", {useNewUrlParser: true});
+
+// Setup routes
+const authRouter = require("./routes/auth.js");
+const commentsRouter = require("./routes/comments.js");
+const indexRouter = require("./routes/index.js");
+const postsRouter = require("./routes/posts.js");
+const usersRouter = require("./routes/users.js");
 
 const app = express();
 
@@ -24,48 +31,9 @@ app.listen(3000, function(){
 //          1. Must be in Routes folder
 //          2. Must use the appropriate HTTP methods (get vs post)
 //          3. SOME ROUTES COULD STILL BE MISSING
-app.get("/", function(req, res){
-    res.render("index", {title: "Your Main Source of Fun"});
-});
 
-app.get("/login", function(req, res){
-    res.render("login", {title: "Login"});
-});
-
-app.get("/register", function(req, res){
-    res.render("register", {title: "Register Now"});
-});
-
-app.get("/postCreate", function(req, res){
-    res.render("postCreate", {title: "Post Your Meme"});
-});
-
-app.get("/aboutUs", function(req, res){
-    res.render("aboutUs", {title: "About Us"});
-});
-
-app.get("/settings", function(req, res){
-    res.render("settings", {title: "Account Settings"});
-});
-
-app.get("/postView", function(req, res){
-    res.render("postView", {title: "Your Main Source of Fun"});
-});
-
-app.get("/userView", function(req, res){
-    res.render("userView", {title: "Your Main Source of Fun"});
-});
-
-app.get("/commEdit", function(req, res){
-    res.render("commEdit", {title: "Your Main Source of Fun"});
-});
-
-// HOME
-
-app.post("/home", function(req, res){
-    res.render("home", {title: "Your Main Source of Fun"});
-});
-
-app.get("/home", function(req, res){
-    res.render("home", {title: "Your Main Source of Fun"});
-});
+app.use("/", authRouter );
+app.use("/", commentsRouter);
+app.use("/", indexRouter);
+app.use("/", postsRouter);
+app.use("/", usersRouter);
