@@ -3,8 +3,15 @@ const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 
+// Schemas
+const User = require("./models/users.js");
+
+const app = express();
+
 // Setup MongoDB Connection
-mongoose.connect("mongodb://localhost:27017/memedia", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/memedia", {useNewUrlParser: true})
+    .then((result) => console.log("Connected to DB!"))
+    .catch((err) => console.log(err));
 
 // Setup routes
 const authRouter = require("./routes/auth.js");
@@ -12,8 +19,6 @@ const commentsRouter = require("./routes/comments.js");
 const indexRouter = require("./routes/index.js");
 const postsRouter = require("./routes/posts.js");
 const usersRouter = require("./routes/users.js");
-
-const app = express();
 
 app.set("view engine", "ejs");
 

@@ -6,4 +6,6 @@ const repCommSchema = new mongoose.Schema({
     remarks: {type: String, required: true},
 });
 
-module.exports = mongoose.model('ReportComment', repCommSchema);
+const RepComment = mongoose.model('ReportComment', repCommSchema);
+
+module.exports = RepComment;

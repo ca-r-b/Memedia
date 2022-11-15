@@ -8,4 +8,6 @@ const votesSchema = new mongoose.Schema({
         // If vote === 1 -> Upvote 
 });
 
-module.exports = mongoose.model('Votes', votesSchema);
+const Votes = mongoose.model('Votes', votesSchema);
+
+module.exports = Votes;

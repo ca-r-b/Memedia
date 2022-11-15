@@ -6,4 +6,6 @@ const repPostSchema = new mongoose.Schema({
     remarks: {type: String, required: true},
 });
 
-module.exports = mongoose.model('ReportPost', repPostSchema);
+const RepPost = mongoose.model('ReportPost', repPostSchema);
+
+module.exports = RepPost;
