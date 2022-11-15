@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 
 // Setup MongoDB Connection
-// mongoose.connect("mongodb://localhost:27017/memediadb", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/memedia", {useNewUrlParser: true});
 
 // Setup routes
 const authRouter = require("./routes/auth.js");
