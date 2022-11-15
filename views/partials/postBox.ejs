@@ -23,20 +23,20 @@
 
             <!-- ID of <form> is for CSS purposes -->
             <!-- Note: REMOVE <form> if you think it is not necessary -->
-            <form id="post-vote-form"> 
-                <!-- TO-DO - DATABASE NEED: 
+            <form method="post" id="post-vote-form" onsubmit="noReload();"> 
+                <!-- TO-DO - DATABASE NEED:
                     Replace ICON with "bi bi-caret-*up or down* FILLED" if CLICKED 
                     1. Add If-Else statement to check if User has voted on post
                     2. If User has voted on post, check if it is Upvote or Downvote
                         - Make sure that Up/Downvote button's icon is changed if pressed by user
                     3. If User has voted on post, make sure yung itsura ng BUTTON [yung vinote nya] and the COUNT OF VOTES ARE UPDATED
                 -->
-                <button id="upVote">
+                <button type="submit" id="upVote">
                     <i id="post-upv" class="bi bi-caret-up"></i>
                     <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
                     <p id="post-upv-count">5</p>
                 </button>
-                <button id="downVote">
+                <button type="submit" id="downVote">
                     <i id="post-dv" class="bi bi-caret-down"></i>
                     <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
                     <p id="post-dv-count">5</p>
