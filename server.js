@@ -4,6 +4,11 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 
 // Schemas
+const Comment = require("./models/comments.js");
+const Post = require("./models/posts.js");
+const RepComment = require("./models/reportComments.js");
+const RepPost = require("./models/reportPosts.js");
+const Vote = require("./models/votes.js");
 const User = require("./models/users.js");
 
 const app = express();

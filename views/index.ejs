@@ -47,12 +47,14 @@
         <div id="index-featured-head">
             <h1>Check these out!</h1>
         </div>
-        <!-- TO-DO -->
         <div>
-            <!-- TO-DO: Add sample postss -->
             <!-- Posts here -->
             <div class = "post-container">
-                <%- include("./partials/postBox.ejs") %> 
+                <% if (posts.length > 0) {%> 
+                    <% posts.forEach(post => { %> 
+                        <%- include("./partials/postBox.ejs", {post: post}) %> 
+                    <% }) %> 
+                <% } %>
             </div>
         </div>
     </div>

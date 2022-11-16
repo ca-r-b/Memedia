@@ -1,11 +1,21 @@
 const express = require("express");
+const Post = require("../models/posts");
 const User = require("../models/users");
 const router = express.Router();
 
 // TO-DO - DATABASE NEEDED: Add .post of routes
 
 router.get("/", function(req, res){
-    res.render("index", {title: "Your Main Source of Fun"});
+    Post.find()
+        .then((result) =>{
+            res.render("index", {
+                title: "Your Main Source of Fun",
+                posts: result
+            });
+        })
+        .catch((err) =>{
+            console.log(err);
+        });
 });
 
 // router.get("/", function(req, res){
@@ -20,6 +30,7 @@ router.get("/", function(req, res){
 
 router.post("/home", function(req, res){
     res.render("home", {title: "Your Main Source of Fun"});
+    
 });
 
 router.get("/home", function(req, res){

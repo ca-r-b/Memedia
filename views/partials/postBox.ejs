@@ -1,15 +1,12 @@
 <div class="post-box">
     <div class="post-user-link">
-        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Username -->
-        <a href="#">Posted by: @catLover</a>      
+        <a href="#">Posted by: <%= post.username %> </a>      
     </div>
     <div class="post-header">
-        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Post Caption -->
-        <a href="#" class="post-caption"><h2>When the cat is an impostor 🤨</h2></a>
+        <a href="#" class="post-caption"><h2><%= post.caption %></h2></a>
     </div>
     <div class="post-content-box">
-        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Post Image -->
-        <img class="post-content" src="images/meme1.jpg" alt="Eyebrow Cat">
+        <img class="post-content" src="images/posts/<%= post.img %>">
     </div>
     <div class="post-footer">
         <div class="post-icons">
@@ -22,36 +19,24 @@
             -->
 
             <!-- ID of <form> is for CSS purposes -->
-            <!-- Note: REMOVE <form> if you think it is not necessary -->
             <form method="post" id="post-vote-form" onsubmit="noReload();"> 
-                <!-- TO-DO - DATABASE NEED:
-                    Replace ICON with "bi bi-caret-*up or down* FILLED" if CLICKED 
-                    1. Add If-Else statement to check if User has voted on post
-                    2. If User has voted on post, check if it is Upvote or Downvote
-                        - Make sure that Up/Downvote button's icon is changed if pressed by user
-                    3. If User has voted on post, make sure yung itsura ng BUTTON [yung vinote nya] and the COUNT OF VOTES ARE UPDATED
-                -->
                 <button type="submit" id="upVote">
                     <i id="post-upv" class="bi bi-caret-up"></i>
-                    <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
-                    <p id="post-upv-count">5</p>
+                    <p id="post-upv-count"><%= post.upvotes %></p>
                 </button>
                 <button type="submit" id="downVote">
                     <i id="post-dv" class="bi bi-caret-down"></i>
-                    <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
-                    <p id="post-dv-count">5</p>
+                    <p id="post-dv-count"><%= post.downvotes %></p>
                 </button>
             </form>
                 
             <a class="post-comment" href="#"><button><i id="post-comment-icon" class="bi bi-chat-left-dots-fill"></i></button></a>
 
-            <!-- Other buttons -->
             <!-- TO-DO - DATABASE NEED: If NOT OWNED by User, put REPORT BUTTON; Otherwise, if OWNED by User, put DELETE BUTTON -->
             <button name="reportPost" id="post-report" data-bs-toggle="modal" data-bs-target="#report-post-modal"><i class="bi bi-flag-fill"></i> Report</button>
             <button name="deletePost" id="post-delete" data-bs-toggle="modal" data-bs-target="#delete-post-modal"><i class="bi bi-trash3-fill"></i> Delete</button>
-            
-            <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Date of Post -->
-            <h3 class="post-date">October 10, 2022</h3>
+
+            <h3 class="post-date"><%= post.dateCreated %></h3>
         </div>
         <hr class="post-divider">
     </div>
