@@ -126,7 +126,7 @@ body{
 /* Register - Side Picture */
 .register-info-container{
     align-items: center;
-    background-image: url("images/defaults/bg-1.jpg");
+    background-image: url("/images/defaults/bg-1.jpg");
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     padding: 20px;
@@ -234,7 +234,7 @@ body{
 /* Login - Side Picture */
 .login-info-container{
     align-items: center;
-    background-image: url("images/defaults/bg-1.jpg");
+    background-image: url("/images/defaults/bg-1.jpg");
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     padding: 20px;
@@ -363,7 +363,7 @@ body{
 
 #create-post-content{
     background-color: #C9ADA7;
-    background-image: url(images/defaults/no-file.png);
+    background-image: url(/images/defaults/no-file.png);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -980,7 +980,7 @@ body{
 }
 
 .profile-header{
-    background-image: url(images/defaults/bg-1.jpg);
+    background-image: url(/images/defaults/bg-1.jpg);
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     height: 150px;

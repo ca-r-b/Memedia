@@ -3,7 +3,7 @@
         <div class="profile-header">
             <div class="profile-header-name">
                 <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Username -->
-                <h1><b>Carlo</b></h1>
+                <h1><b><%= users.username %></b></h1>
             </div>
             <!-- TO-DO - DATABASE NEED: If profile is User's, show "Edit Profile"; If NOT User's own profile, REMOVE "Edit Profile" -->
             <div class="profile-header-btn">
@@ -12,12 +12,12 @@
         </div>
         <div class="profile-image">
             <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Profile -->
-            <img src="images/devs/dev-2.jpg"/>
+            <img src="/images/pfps/<%= users.img %>"/>
         </div>
         <div class="profile-bio">
             <h2><b>BIOGRAPHY</b></h2>
             <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Bio-->
-            <p>hello guys, can you all add me to your fbs lol, thank you. @snapchat here - wait can yall like subscribe to my onlyFans too LOOOLL NEED THAT MOOLAH</p>
+            <p><%= users.bio %></p>
         </div>
     </div>
     <div class="profile-posts">
@@ -26,6 +26,10 @@
             <hr/>
         </div>
        <!-- TO-DO - DATABASE NEED: Make sure ALL posts of user is displayed here -->
-        <%- include("./partials/postBox.ejs") %> 
+        <% if (posts.length > 0) {%> 
+            <% posts.forEach(post => { %> 
+                <%- include("./partials/postBox.ejs", {post: post}) %> 
+            <% }) %> 
+        <% } %>
     </div>
 </div>

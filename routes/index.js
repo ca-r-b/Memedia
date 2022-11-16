@@ -18,23 +18,23 @@ router.get("/", function(req, res){
         });
 });
 
-// router.get("/", function(req, res){
-//     User.find()
-//         .then((result) => {
-//             res.send(result);
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         })
-// });
-
 router.post("/home", function(req, res){
     res.render("home", {title: "Your Main Source of Fun"});
     
 });
 
+// To be removed after "Login" is working
 router.get("/home", function(req, res){
-    res.render("home", {title: "Your Main Source of Fun"});
+    Post.find()
+        .then((result) =>{
+            res.render("home", {
+                title: "Your Main Source of Fun",
+                posts: result
+            });
+        })
+        .catch((err) =>{
+            console.log(err);
+        });
 });
 
 router.get("/aboutUs", function(req, res){

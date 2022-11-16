@@ -3,10 +3,10 @@
         <a href="#">Posted by: <%= post.username %> </a>      
     </div>
     <div class="post-header">
-        <a href="#" class="post-caption"><h2><%= post.caption %></h2></a>
+        <a href="/user/<%= post.username %>" class="post-caption"><h2><%= post.caption %></h2></a>
     </div>
     <div class="post-content-box">
-        <img class="post-content" src="images/posts/<%= post.img %>">
+        <img class="post-content" src="/images/posts/<%= post.img %>">
     </div>
     <div class="post-footer">
         <div class="post-icons">
