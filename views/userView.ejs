@@ -27,11 +27,9 @@
         </div>
        <!-- TO-DO - DATABASE NEED: Make sure ALL posts of user is displayed here -->
         <% if (posts.length > 0) {%> 
-            <% posts.forEach(post => { %> 
-                <%- include("./partials/postBox.ejs", {post: post}) %>
-                <!-- Report Modals -->
-                <%- include("./partials/reportPost.ejs", {post: post}) %> 
-            <% }) %> 
+            <% for(var i = 0; i < posts.length; i++) {%> 
+                <%- include("./partials/postBox.ejs", {post: posts[i]}) %>
+            <% } %> 
         <% } %>
     </div>
 </div>

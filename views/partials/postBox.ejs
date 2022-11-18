@@ -28,12 +28,16 @@
                     <i id="post-dv" class="bi bi-caret-down"></i>
                     <p id="post-dv-count"><%= post.downvotes %></p>
                 </button>
+                <!-- Fix!!! -->
+                <p><%= post._id %></p>
             </form>
                 
+            <!-- ??? -->
             <a class="post-comment" href="#"><button><i id="post-comment-icon" class="bi bi-chat-left-dots-fill"></i></button></a>
 
             <!-- TO-DO - DATABASE NEED: If NOT OWNED by User, put REPORT BUTTON; Otherwise, if OWNED by User, put DELETE BUTTON -->
             <button name="reportPost" id="post-report" data-bs-toggle="modal" data-bs-target="#report-post-modal"><i class="bi bi-flag-fill"></i> Report</button>
+            
             <button name="deletePost" id="post-delete" data-bs-toggle="modal" data-bs-target="#delete-post-modal"><i class="bi bi-trash3-fill"></i> Delete</button>
 
             <h3 class="post-date"><%= post.dateCreated %></h3>
