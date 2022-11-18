@@ -7,29 +7,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- TO-DO - DATABASE NEED: Add ACTION to <form>; ADD to DATABASE of REPORT POST SCHEMA-->
-            <form>
+            <form action="/postReport/<%= post._id %>" method="post">
                 <div class="modal-body">
                     <h4>Why are you reporting this post?</h4>
-                    <input name="reportType" id="report-inappropriate" type="radio">
+                    <input name="reportType" value="inappropriate" type="radio">
                     <label for="report-inappropriate">Inappropriate</label>
                     <br/>
-                    <input name="reportType" id="report-rude" type="radio">
+                    <input name="reportType" value="rude" type="radio">
                     <label for="report-rude">Rude content</label>
                     <br/>
-                    <input name="reportType" id="report-spam" type="radio">
+                    <input name="reportType" value="spam" type="radio">
                     <label for="report-spam">Spam</label>
                     <br/>
-                    <input name="reportType" id="report-false" type="radio">
+                    <input name="reportType" value="false-info" type="radio">
                     <label for="report-false">False Information</label>
                     <br/>
-                    <input name="reportType" id="report-sexual" type="radio">
+                    <input name="reportType" value="sexual" type="radio">
                     <label for="report-sexual">Sexual Content or Nudity</label>
                     <br/>
                 </div>
                 <div class="modal-footer">
                     <!-- TO-DO - Make sure buttons works -->
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Report</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Report</button>
                 </div>
             </form>
         </div>

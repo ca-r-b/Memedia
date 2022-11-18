@@ -75,6 +75,9 @@
             </form>
         </div>
         <!-- TO-DO - DATABASE NEEDED: Get comments of post -->
+        <!-- TO-DO - ADD: Iterate here + Variable being passed -->
         <%- include("./partials/comment.ejs") %> 
     </div>
 </div>
+<!-- Edit variable being passed? -->
+<%- include("./partials/reportPost.ejs", {post: post}) %> 
