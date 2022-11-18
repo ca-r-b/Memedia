@@ -1,5 +1,6 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
+const fileUpload = require("express-fileupload");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 
@@ -27,6 +28,7 @@ const usersRouter = require("./routes/users.js");
 
 app.set("view engine", "ejs");
 
+app.use(fileUpload());
 app.use(expressLayouts);
 app.set('layout', './layouts/main');
 app.use(express.static("public"));

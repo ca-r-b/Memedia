@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const path = require('path');
 
 // TO-DO - DATABASE NEEDED: Add .post of routes
 
@@ -8,7 +9,11 @@ router.get("/postCreate", function(req, res){
 });
 
 router.post("/postUpload", function(req, res){
-    // Fill out
+    var img = req.files.postImg;
+    var imgName = img.name;
+
+    // Redirect to upload folder
+    img.mv(path.resolve(__dirname + '/..', 'public/images/posts', imgName));
 });
 
 router.get("/postView", function(req, res){
