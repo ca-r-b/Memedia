@@ -4,7 +4,7 @@
 </div>
 
 <!-- TO-DO - DATABASE NEEDED: Make sure post is ADDED to database -->
-<form enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
     <div class="create-form-container">
         <div class="create-post-title">
             <br/>
@@ -13,7 +13,7 @@
         <p class="create-post-prompt">Select a meme from your files.</p>
         <div id="create-post-content"></div>
         <div class="create-post-upload">
-            <input id="create-post-input-content" type="file" name="postContent" accept="image/png, image/jpg, image/jpeg" required><br/>
+            <input id="create-post-input-content" type="file" name="postImg" accept="image/png, image/jpg, image/jpeg" required><br/>
         </div>
     </div>
     <input id="create-post-upload-btn" type="submit" name="uploadPost" value="Upload Post!">
