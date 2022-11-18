@@ -20,14 +20,13 @@
 
             <!-- ID of <form> is for CSS purposes -->
             <form method="post" id="post-vote-form" onsubmit="noReload();"> 
-                <button type="submit" id="upVote">
+                <button type="submit" id="upVote" onclick="">
                     <i id="post-upv" class="bi bi-caret-up"></i>
-                    <p id="post-upv-count"><%= post.upvotes %></p>
                 </button>
                 <button type="submit" id="downVote">
                     <i id="post-dv" class="bi bi-caret-down"></i>
-                    <p id="post-dv-count"><%= post.downvotes %></p>
                 </button>
+                <p id="post-count"><%= post.upvotes - post.downvotes %></p>
                 <!-- Fix!!! -->
                 <p><%= post._id %></p>
             </form>

@@ -744,16 +744,16 @@ body{
     margin-right: 5px;
 }
 
-#post-upv-count, #post-dv-count, #post-delete{
+#post-delete{
     color: white;
 }
 
-#post-upv-count:hover, #post-dv-count:hover, #post-delete:hover{
+#post-delete:hover{
     color: #22223B;
 }
 
 
-#post-upv-count, #post-dv-count, #post-upv, #post-dv, #post-comment-icon, #post-delete, #post-report{
+#post-upv, #post-dv, #post-comment-icon, #post-delete, #post-report{
     color: #dbc8c3;
     transition: all 0.2s;
 }
