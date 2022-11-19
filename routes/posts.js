@@ -62,8 +62,7 @@ router.get("/post/:id", function(req, res){
 
 // ============== Post Reporting ==============
 
-// TO-DO - replace to POST
-router.get("/postReport/:id", function(req, res){
+router.post("/postReport/:id", function(req, res){
     const postID = req.params.id;
     console.log(postID)
 
@@ -79,7 +78,7 @@ router.get("/postReport/:id", function(req, res){
         });
 });
 
-router.post("/confirmReport/:id", function(req, res){
+router.post("/confirmPostReport/:id", function(req, res){
     var repType = req.body.reportType;
 
     console.log(repType);

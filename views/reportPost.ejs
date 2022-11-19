@@ -6,10 +6,10 @@
     </div>
 
     <!-- Body -->
-    <form action="/confirmReport/<%= post._id %>" method="get">
+    <form action="/confirmPostReport/<%= post._id %>" method="post">
         <div class="report-body">
             <h4><b>WHY ARE YOU REPORTING THIS <a href="/post/<%= post._id %>" target="_blank">POST</a>?</b></h4>
-            <input name="reportType" value="inappropriate" type="radio">
+            <input name="reportType" value="inappropriate" type="radio" required>
             <label>Inappropriate</label>
             <br/>
             <input name="reportType" value="rude" type="radio">

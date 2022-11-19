@@ -1,0 +1,38 @@
+<!-- REPORT POST -->
+<div class="report-container">
+    <!-- Header -->
+    <div class="report-header">
+        <h1>REPORT COMMENT</h1>
+    </div>
+
+    <!-- Body -->
+    <form action="/confirmCommReport/<%= post._id %>/<%= comment._id %>" method="post">
+        <div class="report-body">
+            <h4><b>WHY ARE YOU REPORTING THIS COMMENT FROM THIS <a href="/post/<%= post._id %>" target="_blank">POST</a>?</b></h4>
+            <hr/>
+            <p id="report-comment-container">"<%= comment.content%>"</p>
+            <p><i>Comment by: <%= comment.username%></i></p>
+            <hr/>
+            <input name="reportType" value="inappropriate" type="radio" required>
+            <label>Inappropriate</label>
+            <br/>
+            <input name="reportType" value="rude" type="radio">
+            <label>Rude content</label>
+            <br/>
+            <input name="reportType" value="spam" type="radio">
+            <label>Spam</label>
+            <br/>
+            <input name="reportType" value="false-info" type="radio">
+            <label>False Information</label>
+            <br/>
+            <input name="reportType" value="sexual" type="radio">
+            <label>Sexual Content or Nudity</label>
+            <br/>
+        </div>
+        <!-- Footer -->
+        <div class="report-footer">
+            <button id="report-submit" type="submit">Submit Report</button>
+        </div>
+    </form>
+    <a href="javascript:history.back()"><button id="report-cancel">Cancel</button></a>
+</div>

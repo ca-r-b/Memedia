@@ -1150,6 +1150,12 @@ body{
     width: 1000px;
 }
 
+.report-container hr{
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+}
+
 .report-container button{
     border-style: none;
     border-radius: 10px;
@@ -1165,11 +1171,26 @@ body{
     font-size: 17px;
 }
 
+#report-comment-container{
+    border-style: solid;
+    border-color: #22223B;
+    border-width: 1px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+}
+
 .report-header{
     background-color: #9A8C98;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    font-family: 'Concert One', cursive;
     padding: 20px;
+}
+
+.report-body h4{
+    font-family: 'Concert One', cursive;
 }
 
 .report-body{
