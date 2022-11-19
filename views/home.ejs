@@ -12,8 +12,6 @@
     <% if (posts.length > 0) {%> 
         <% posts.forEach(post => { %> 
             <%- include("./partials/postBox.ejs", {post: post}) %>
-            <!-- Report Modals -->
-            <%- include("./partials/reportPost.ejs", {post: post}) %> 
         <% }) %> 
     <% } %>
 </div>

@@ -1,15 +1,15 @@
 <div class="post-box">
     <div class="post-user-link">
-        <a href="#">Posted by: <%= post.username %> </a>      
+        <a href="/user/<%= post.username %>">Posted by: <%= post.username %> </a>      
     </div>
     <div class="post-header">
-        <a href="/user/<%= post.username %>" class="post-caption"><h2><%= post.caption %></h2></a>
+        <a href="#" class="post-caption"><h2><%= post.caption %></h2></a>
     </div>
     <div class="post-content-box">
         <img class="post-content" src="/images/posts/<%= post.img %>">
     </div>
     <div class="post-footer">
-        <div class="post-icons">
+        <div class="post-info">
             
             <!-- TO-DO - DATABASE + JS NEED: Add functionality 
                 1. User can only vote for 1 (e.g. Kung nag-Upvote siya then pinagchange to Downvote, mawawala Upvote niya)
@@ -17,30 +17,14 @@
                 3. Make sure button is updated
                 4. Add action to <form> [REMOVE <form> tag if you think it is NOT necessary]
             -->
-
-            <!-- ID of <form> is for CSS purposes -->
-            <form method="post" id="post-vote-form" onsubmit="noReload();"> 
-                <button type="submit" id="upVote" onclick="">
-                    <i id="post-upv" class="bi bi-caret-up"></i>
-                </button>
-                <button type="submit" id="downVote">
-                    <i id="post-dv" class="bi bi-caret-down"></i>
-                </button>
-                <p id="post-count"><%= post.upvotes - post.downvotes %> Vote/s</p>
-                <!-- Fix!!! -->
-                <p><%= post._id %></p>
-            </form>
-                
-            <!-- ??? -->
-            <a class="post-comment" href="#"><button><i id="post-comment-icon" class="bi bi-chat-left-dots-fill"></i></button></a>
+            <p id="post-count"><i id="post-count-icon" class="bi bi-arrow-down-up"></i> Votes: <%= post.upvotes - post.downvotes %></p>
+            
 
             <!-- TO-DO - DATABASE NEED: If NOT OWNED by User, put REPORT BUTTON; Otherwise, if OWNED by User, put DELETE BUTTON -->
-            <button name="reportPost" id="post-report" data-bs-toggle="modal" data-bs-target="#report-post-modal"><i class="bi bi-flag-fill"></i> Report</button>
-            
-            <button name="deletePost" id="post-delete" data-bs-toggle="modal" data-bs-target="#delete-post-modal"><i class="bi bi-trash3-fill"></i> Delete</button>
+            <!-- Report Button == Redirect to Reporting Page -->
 
-            <h3 class="post-date"><%= post.dateCreated %></h3>
+            <p class="post-date"><i class="bi bi-clock"></i> Posted on: <%= post.dateCreated.toDateString() %></p>
+            <hr class="post-divider">
         </div>
-        <hr class="post-divider">
     </div>
 </div>

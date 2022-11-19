@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require('path');
+const Post = require("../models/posts");
 const RepComment = require("../models/reportComments");
 const RepPost = require("../models/reportPosts");
 
@@ -26,7 +27,26 @@ router.post("/postUpload", function(req, res){
 // ============== Post Reporting ==============
 
 router.post("/postReport/:id", function(req, res){
+    const postID = req.params.id;
+
+    console.log(postID)
+
+    Post.findById(postID)
+        .then((results) => {
+            res.render("reportPost", {
+                title: "Report Post",
+                post: results
+            });
+        })
+        .catch((err) =>{
+            console.log(err);
+        });
+});
+
+router.post("/confirmReport/:id", function(req, res){
     var repType = req.body.reportType;
+
+    console.log(repType);
 
     const report = new RepPost({
         postID: req.params.id,
@@ -37,7 +57,7 @@ router.post("/postReport/:id", function(req, res){
 
     report.save()
         .then((result) => {
-            res.redirect(req.get("referer"));
+            res.redirect("/");
         })
         .catch((err) =>{
             res.send(err);

@@ -27,11 +27,6 @@ router.get("/user/:profileName", function(req, res){
         });
 });
 
-// to be deleted
-router.get("/userlol", function(req, res){
-    res.render("userView", {title: "Your"});
-})
-
 router.get("/settings", function(req, res){
     res.render("settings", {title: "Account Settings"});
 });
