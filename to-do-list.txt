@@ -1,13 +1,37 @@
-This list could be incomplete / Baka di ako tama sa ibang things hehehe.
+To-Do:
 
-Missing:
-1. Database Connection
-2. Database Sample Posts, Users, etc.
-3. Some other JS shit???
-4. Search Bar Functionality
-	- Add Search Bar Page
-5. Route Controllers
-6. Idk kung pano mag add ng image to site AHSFHASH
+DATABASE-RELIANT:
+=================
+- Adding
+	- Post
+	- Comment
+	- Reports
+	- Registration
+	- Voting
 
-Notes:
-1. Add files/codes/other stuff if necessary
+- Removing
+	- Post
+	- Comment
+	- Voting
+
+- Updating / Editing
+	- Comment
+	- Account Settings (Credentials)
+	- Voting
+
+MVC + ROUTES:
+=================
+- Controller - Add route logics to controller
+- Routes - Fixing routes [Adding: "/:id"]
+
+OTHER IMPORTANT:
+=================
+- Logging In
+	= Work Left:
+		- Must not work if User is not found
+
+- Search Bar
+	= Work left:
+		- Half done
+
+- Replace "#" in Hrefs
