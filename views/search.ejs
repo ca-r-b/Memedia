@@ -15,5 +15,7 @@
         <% posts.forEach(post => { %> 
             <%- include("./partials/postBox.ejs", {post: post}) %>
         <% }) %> 
+    <% }else { %>
+        <h1 id="nav-no-search">We can't seem to find what you're looking for...</h1>
     <% } %>
 </div>

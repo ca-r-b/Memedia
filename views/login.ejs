@@ -18,14 +18,14 @@
             <!-- TO-DO - DATABASE NEEDED: 
                 1. Replace METHOD from "get" to "post" AFTER ADDING MongoDB 
             -->
-            <form action="home" method="get">
+            <form action="/login/verify" method="post">
                 <!-- Login Input -->
                 <label for="login-username">Username</label><br/>
-                <input name="username" id="login-username" type="text" placeholder="Username"><br/>
+                <input name="username" id="login-username" type="text" placeholder="Username" required><br/>
                 <br/>
                 <!-- Password Input -->
                 <label for="login-pass">Password</label><br/>
-                <input name="password" id="login-pass" type="password" placeholder="Password"><br/>
+                <input name="password" id="login-pass" type="password" placeholder="Password" required><br/>
                 <br/>
                 <!-- Submit -->
                 <button type="submit">Log In</button>

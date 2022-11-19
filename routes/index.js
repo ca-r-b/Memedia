@@ -23,19 +23,19 @@ router.post("/home", function(req, res){
     
 });
 
-// To be removed after "Login" is working
-router.get("/home", function(req, res){
-    Post.find().sort({dateCreated: -1})
-        .then((result) =>{
-            res.render("home", {
-                title: "Your Main Source of Fun",
-                posts: result
-            });
-        })
-        .catch((err) =>{
-            console.log(err);
-        });
-});
+// // To be removed after "Login" is working
+// router.post("/home", function(req, res){
+//     Post.find().sort({dateCreated: -1})
+//         .then((result) =>{
+//             res.render("home", {
+//                 title: "Your Main Source of Fun",
+//                 posts: result
+//             });
+//         })
+//         .catch((err) =>{
+//             console.log(err);
+//         });
+// });
 
 router.get("/aboutUs", function(req, res){
     res.render("aboutUs", {title: "About Us"});

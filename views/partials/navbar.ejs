@@ -10,8 +10,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="col-md-6 col-lg-7 col-11 mx-auto my-auto">
                 <!-- TO-DO - DATABASE NEED(?): Make sure SEARCH is working -->
-                <form class="d-flex" role="search">
-                    <input class="form-control" type="search" placeholder="Search..." aria-label="Search" size="100px">
+                <form method="get" action="/search" class="d-flex" role="search">
+                    <input name="searchInput" class="form-control" type="search" placeholder="Search..." aria-label="Search the title of the Meme" size="100px">
                     <button class="btn btn-light" type="submit"><i class="bi bi-search"></i></button>
                 </form>
             </div>

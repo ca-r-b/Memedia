@@ -27,7 +27,8 @@
 
         <!-- ID of <form> is for CSS purposes -->
         <!-- Note: REMOVE <form> if you think it is not necessary -->
-        <form method="post" id="post-vote-form" onsubmit="noReload();">
+                <!-- TO-DO - Replace "popCat" with real user -->
+        <form action="/vote/<%= post._id%>/popCat" method="post" id="post-vote-form">
             <!-- TO-DO - DATABASE NEED: 
                 Replace ICON with "bi bi-caret-*up or down* FILLED" if CLICKED 
                 1. Add If-Else statement to check if User has voted on post
@@ -35,17 +36,23 @@
                     - Make sure that Up/Downvote button's icon is changed if pressed by user
                 3. If User has voted on post, make sure yung itsura ng BUTTON [yung vinote nya] and the COUNT OF VOTES ARE UPDATED
             -->
-            <button id="upVote">
+            <button name="voteBtn" value="1" id="upVote" type="submit">
                 <i id="post-upv" class="bi bi-caret-up"></i>
                 <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
                 <p>UPVOTE</p>
             </button>
-            <button id="downVote">
+            <button name="voteBtn" value="0" id="downVote" type="submit">
                 <i id="post-dv" class="bi bi-caret-down"></i>
                 <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
                 <p>DOWNVOTE</p>
             </button>
-            <p id="view-post-count">VOTE COUNT: <%= post.upvotes - post.downvotes %></p>
+        </form>
+
+        <p id="view-post-count">VOTE COUNT: <%= post.upvotes - post.downvotes %></p>
+
+        <!-- Remove vote -->
+        <form id="post-vote-form">
+            <button id="view-post-remove-vote" name="removeVote" type="submit">Remove Vote</button>
         </form>
 
         <div class="view-post-stats-others">

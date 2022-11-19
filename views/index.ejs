@@ -2,22 +2,22 @@
 <div class="index-container">
     <%- include( "./partials/carousel.ejs") %> 
 
-    <!-- Featured Posts -->
-    <!-- TO-DO: If User selects to Upvote/Downvote/Comment, prompt user to LOGIN FIRST -->
-    <div id="index-featured">
-        <div id="index-featured-head">
-            <h1>Check these out!</h1>
-        </div>
-        <div>
-            <!-- Posts here -->
-            <div class = "post-container">
-                <% if (posts.length > 0) {%> 
-                    <% posts.forEach(post => { %> 
-                        <%- include("./partials/postBox.ejs", {post: post}) %> 
-                    <% }) %> 
-                <% } %>
-            </div>
-        </div>
+    <div class="home-h1-containter">
+        <a href="home"><h1 class="home-h1">WHAT'S POPPIN'?</h1></a>
+    </div>
+
+    <div class = "post-container">
+        <!-- 
+            TO-DO:
+            1. Add For-Loop [Iterate through database / Show all posts]
+            2. User redirection [Logged in]
+        -->
+
+        <% if (posts.length > 0) {%> 
+            <% posts.forEach(post => { %> 
+                <%- include("./partials/postBox.ejs", {post: post}) %>
+            <% }) %> 
+        <% } %>
     </div>
     
 </div>

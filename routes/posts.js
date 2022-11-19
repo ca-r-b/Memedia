@@ -6,8 +6,7 @@ const Post = require("../models/posts");
 const Comment = require("../models/comments")
 const RepComment = require("../models/reportComments");
 const RepPost = require("../models/reportPosts");
-
-// TO-DO - DATABASE NEEDED: Add .post of routes
+const Vote = require("../models/votes");
 
 // ============== Post Uploading ==============
 
@@ -29,34 +28,25 @@ router.post("/postUpload", function(req, res){
 
 router.get("/post/:id", function(req, res){
     const postID = req.params.id;
-    console.log(postID)
 
-    Post.findById(postID)
-        .then((postRes) => {
-            Comment.find({postID: postID})
-                .then((commRes) => {
-                    User.findOne({username: postRes.username})
-                        .then((userRes) => {
-                            res.render("postView", {
-                                title: "Your Main Source of Fun",
-                                user: userRes,
-                                post: postRes,
-                                comments: commRes
-                        })
-                        .catch((err) =>{
-                            console.log(err);
-                        })
-                    
+    Post.findById(postID).then((postRes) =>{
+        Comment.find({postID: postID}).then((commRes) => {
+            User.findOne({username: postRes.username}).then((userRes) => {
+                res.render("postView", {
+                    title: "Your Main Source of Fun",
+                    user: userRes,
+                    post: postRes,
+                    comments: commRes
                 })
-                .catch((err) =>{
-                    console.log(err);
-                })
-        })
-        .catch((err) => {
+            }).catch((err) => {
+                console.log(err);
+            })
+        }).catch((err) => {
             console.log(err);
         })
-    
-    });
+    }).catch((err)=>{
+        console.log(err);
+    })
 });
 
 
@@ -99,5 +89,49 @@ router.post("/confirmPostReport/:id", function(req, res){
         });
 
 });
+
+// ============== Post Voting ==============
+
+router.post("/vote/:idpost/:voter", function(req, res){
+    var postID = req.params.idpost;
+    var voter = req.params.voter;
+    var action = req.body.voteBtn;
+
+    Vote.findOne({username: voter, postID: postID}).then((voteRes) => {
+        if(voteRes === null){
+            const addVote = new Vote({
+                postID: postID,
+                username: voter,
+                vote: action
+            });
+
+            addVote.save().then((result) => {
+                res.redirect("/post/" + postID);
+            }).catch((err) =>{
+                res.send(err);
+
+                res.redirect("/post/" + postID);
+            });
+        }else{
+            // TO-DO: Update vote
+        }
+    }).catch((err) => {
+        console.log(err);
+    })
+})
+
+// ============== Post Searching ==============
+router.get("/search", function(req, res){
+    const searchInput = req.query.searchInput;
+    console.log(searchInput);
+    Post.find({caption: searchInput}).then((results)=>{
+        res.render("search", {
+            title: "Search Results",
+            posts: results
+        });
+    }).catch((err) => {
+        console.log(err);
+    })
+})
 
 module.exports = router;

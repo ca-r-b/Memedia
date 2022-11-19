@@ -70,6 +70,12 @@ body{
     transition: all 0.3s;
 }
 
+#nav-no-search{
+    margin-top: 70px;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
 /* =============== INDEX PAGE =============== */
 
 #carousel-pictures{
@@ -609,7 +615,7 @@ body{
     border-style: solid;
     border-radius: 10px;
     color: #9A8C98;
-    margin-top: 120px;
+    margin-top: 70px;
     margin-right: auto;
     margin-left: auto;
     width: 550px;
@@ -973,6 +979,17 @@ body{
     margin-top: 3px;
     margin-left: 3px;
 }
+
+#view-post-remove-vote{
+    background-color: #F2E9E4;
+    color: #837781;
+}
+
+#view-post-remove-vote:hover{
+    background-color: #9A8C98;
+    color: #F2E9E4;
+}
+
 
 /* ==========  USER VIEW PAGE ========== */
 

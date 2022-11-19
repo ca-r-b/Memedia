@@ -6,10 +6,10 @@ const Comment = require("../models/comments")
 const RepComment = require("../models/reportComments");
 const RepPost = require("../models/reportPosts");
 
-// TO-DO - DATABASE NEEDED: Add .post of routes
+// ============== Comment Adding ==============
 
-// Report Commenting
-// ============== Post Reporting ==============
+
+// ============== Comment Reporting ==============
 
 router.post("/commReport/:idpost/:idcomm", function(req, res){
     const postID = req.params.idpost;
@@ -59,6 +59,8 @@ router.post("/confirmCommReport/:idpost/:idcomm", function(req, res){
         });
 
 });
+
+// ============== Comment Editing ==============
 
 router.get("/commEdit", function(req, res){
     res.render("commEdit", {title: "Your Main Source of Fun"});
