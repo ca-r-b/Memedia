@@ -2,13 +2,13 @@
 <div class="report-container">
     <!-- Header -->
     <div class="report-header">
-        <h2>REPORT POST</h2>
+        <h1>REPORT POST</h1>
     </div>
 
     <!-- Body -->
-    <form action="/confirmReport/<%= post._id %>" method="post">
+    <form action="/confirmReport/<%= post._id %>" method="get">
         <div class="report-body">
-            <h4>Why are you reporting the post?</h4>
+            <h4><b>WHY ARE YOU REPORTING THIS <a href="/post/<%= post._id %>" target="_blank">POST</a>?</b></h4>
             <input name="reportType" value="inappropriate" type="radio">
             <label>Inappropriate</label>
             <br/>
@@ -24,12 +24,11 @@
             <input name="reportType" value="sexual" type="radio">
             <label>Sexual Content or Nudity</label>
             <br/>
-            <p><%= post._id %></p>
         </div>
         <!-- Footer -->
         <div class="report-footer">
             <button id="report-submit" type="submit">Submit Report</button>
-            <button id="report-cancel">Cancel</button>
         </div>
     </form>
+    <a href="javascript:history.back()"><button id="report-cancel">Cancel</button></a>
 </div>

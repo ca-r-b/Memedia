@@ -881,6 +881,7 @@ body{
     border-radius: 3px;
     margin-top: 8px;
     margin-right: 3px;
+    padding: 7px;
     transition: all 0.2s;
 }
 
@@ -888,6 +889,14 @@ body{
     background-color: #ffffff;
     color: #22223B;
     border: none;
+}
+
+#view-post-count{
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    padding: 7px;
 }
 
 .view-post-stats p{
@@ -1131,4 +1140,51 @@ body{
 }
 
 /* ==========  EDIT COMMENT ========== */
+.report-container{
+    border-radius: 15px;
+    font-size: 20px;
+    margin-top: 130px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 1000px;
+}
 
+.report-container button{
+    border-style: none;
+    border-radius: 10px;
+    color: #57576b;
+    font-size: 17px;
+    padding: 15px;
+    transition: all 0.2s;
+}
+
+.report-container button:hover{
+    background-color: #57576b;
+    color: white;
+    font-size: 17px;
+}
+
+.report-header{
+    background-color: #9A8C98;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 20px;
+}
+
+.report-body{
+    background-color: #F2E9E4;
+    color: #22223B;
+    padding: 20px;
+}
+
+.report-footer{
+    background-color: #9A8C98;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 20px;
+}
+
+#report-cancel{
+    margin-top: 15px;
+}

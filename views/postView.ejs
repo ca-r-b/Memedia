@@ -6,7 +6,7 @@
         </div>
         <div class="view-post-user-name">
             <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Username -->
-            <a href="/user/<%= post.username %>">catLover</a>
+            <a href="/user/<%= post.username %>"><%= post.username %></a>
             <hr>
             <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Date of Post -->
             <p>Posted on: <%= post.dateCreated.toDateString() %></p>
@@ -45,7 +45,7 @@
                 <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
                 <p>DOWNVOTE</p>
             </button>
-            <p> · · · VOTE COUNT: <%= post.upvotes - post.downvotes %></p>
+            <p id="view-post-count">VOTE COUNT: <%= post.upvotes - post.downvotes %></p>
         </form>
 
         <div class="view-post-stats-others">
