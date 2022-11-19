@@ -11,16 +11,17 @@ router.get("/user/:profileName", function(req, res){
 
     User.findOne({username: profileName})
         .then((userRes) =>{
-            Post.find({username: profileName}).then((postRes) =>{
-                res.render("userView", {
-                    title: "Your Main Source of Fun",
-                    users: userRes,
-                    posts: postRes
+            Post.find({username: profileName})
+                .then((postRes) =>{
+                    res.render("userView", {
+                        title: "Your Main Source of Fun",
+                        users: userRes,
+                        posts: postRes
+                    });
+                })
+                .catch((err) =>{
+                    console.log(err);
                 });
-            })
-            .catch((err) =>{
-                console.log(err);
-            });
         })
         .catch((err) =>{
             console.log(err);

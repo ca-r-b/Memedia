@@ -876,6 +876,7 @@ body{
 
 .view-post-stats button{
     background-color: #8c7e89;
+    color: white;
     border: none;
     border-radius: 3px;
     margin-top: 8px;
@@ -890,6 +891,11 @@ body{
 }
 
 .view-post-stats p{
+    display: inline;
+}
+
+.view-post-stats-others{
+    float: right;
     display: inline;
 }
 

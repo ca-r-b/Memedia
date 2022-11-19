@@ -2,19 +2,19 @@
 <div class="view-post-comment-user">
     <div class="view-post-comment-name">
         <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Username -->
-        <a href="#">sean12xx</a>
+        <a href="#"><%= comment.username %></a>
         <div class="view-post-comment-options">
             <!-- TO-DO - DATABASE NEED: If NOT OWNED by User, put REPORT BUTTON; Otherwise, if OWNED by User, put DELETE and EDIT BUTTON -->
             <!-- TO-DO - Add BUTTON for Edit Comment -->
-            <button id="report-comment" data-bs-toggle="modal" data-bs-target="#report-comment-modal"><i class="bi bi-flag-fill"></i> Report</button>
+            <button id="report-comment"><i class="bi bi-flag-fill"></i> REPORT</button>
         </div>
     </div>
     <div class="view-post-comment-content">
         <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Comment -->
-        <p>the rock finna adopt that cat</p>
+        <p><%= comment.content %></p>
     </div>
     <div class="view-post-comment-date">
         <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Date Creation -->
-        <p>October 11, 2022</p>
+        <i class="bi bi-clock"></i> Commented on: <%= post.dateCreated.toDateString() %>
     </div>
 </div>

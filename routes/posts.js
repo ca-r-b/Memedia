@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const path = require('path');
+const User = require("../models/users");
 const Post = require("../models/posts");
+const Comment = require("../models/comments")
 const RepComment = require("../models/reportComments");
 const RepPost = require("../models/reportPosts");
 
 // TO-DO - DATABASE NEEDED: Add .post of routes
-
 
 // ============== Post Uploading ==============
 
@@ -21,14 +22,48 @@ router.post("/postUpload", function(req, res){
     // Redirect to upload folder
     img.mv(path.resolve(__dirname + '/..', 'public/images/posts', imgName));
 
-    // Adding to Database here***
+    // TO-DO: Adding to Database here***
 });
+
+// ============== Post Viewing ==============
+
+router.get("/post/:id", function(req, res){
+    const postID = req.params.id;
+    console.log(postID)
+
+    Post.findById(postID)
+        .then((postRes) => {
+            Comment.find({postID: postID})
+                .then((commRes) => {
+                    User.findOne({username: postRes.username})
+                        .then((userRes) => {
+                            res.render("postView", {
+                                title: "Your Main Source of Fun",
+                                user: userRes,
+                                post: postRes,
+                                comments: commRes
+                        })
+                        .catch((err) =>{
+                            console.log(err);
+                        })
+                    
+                })
+                .catch((err) =>{
+                    console.log(err);
+                })
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    
+    });
+});
+
 
 // ============== Post Reporting ==============
 
 router.post("/postReport/:id", function(req, res){
     const postID = req.params.id;
-
     console.log(postID)
 
     Post.findById(postID)
@@ -57,18 +92,12 @@ router.post("/confirmReport/:id", function(req, res){
 
     report.save()
         .then((result) => {
-            res.redirect("/");
+            res.redirect("/post/" + req.params.id);
         })
         .catch((err) =>{
             res.send(err);
         });
 
-});
-
-// ============== Post Viewing ==============
-
-router.get("/postView", function(req, res){
-    res.render("postView", {title: "Your Main Source of Fun"});
 });
 
 module.exports = router;

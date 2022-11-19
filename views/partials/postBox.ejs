@@ -3,7 +3,7 @@
         <a href="/user/<%= post.username %>">Posted by: <%= post.username %> </a>      
     </div>
     <div class="post-header">
-        <a href="#" class="post-caption"><h2><%= post.caption %></h2></a>
+        <a href="/post/<%= post._id %>" class="post-caption"><h2><%= post.caption %></h2></a>
     </div>
     <div class="post-content-box">
         <img class="post-content" src="/images/posts/<%= post.img %>">
@@ -20,7 +20,7 @@
             <p id="post-count"><i id="post-count-icon" class="bi bi-arrow-down-up"></i> Votes: <%= post.upvotes - post.downvotes %></p>
             
 
-            <!-- TO-DO - DATABASE NEED: If NOT OWNED by User, put REPORT BUTTON; Otherwise, if OWNED by User, put DELETE BUTTON -->
+            <!-- TO-DO - DATABASE NEED: if OWNED by User, put DELETE BUTTON -->
             <!-- Report Button == Redirect to Reporting Page -->
 
             <p class="post-date"><i class="bi bi-clock"></i> Posted on: <%= post.dateCreated.toDateString() %></p>
