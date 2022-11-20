@@ -29,27 +29,26 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/user/<%= session.username %>">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Account Settings</a></li>
+                            <li><a class="dropdown-item" href="/settings/<%= session.username %>">Account Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </li>
 
                 <% } else { %>
+
                     <!-- TO-DO - DATABASE NEED: Add If-Else Statements; If user is logged in, make sure button [Log In] is NOT VISIBLE -->
                     <li id="nav-item" class="nav-item">
                         <a href="/login"><button type="submit" id="nav-login-btn" class="btn btn-light">Log In / Sign Up</button></a>
                     </li>
+
                 <% } %>
 
-                <!-- TO-DO - DATABASE NEED: Add If-Else Statements; 
-                    If user is logged in, make sure POST BUTTON [yung nagreredirect ng user sa Create Post page] REDIRECTS them instead to
-                    LOGIN page 
-                -->
                 <li id="nav-item" class="nav-item">
                     <a class="nav-link" aria-current="page" href="/postCreate"><i
                             class="bi bi-pencil-square"></i> Post</a>
                 </li>
+
                 <li id="nav-item" class="nav-item">
                     <a class="nav-link" href="/aboutUs"><i class="bi
                             bi-info-circle"></i> About Us</a>

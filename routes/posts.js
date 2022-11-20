@@ -23,22 +23,53 @@ router.get("/postCreate", isAuth, function(req, res){
     res.render("postCreate", {title: "Post Your Meme"});
 });
 
-router.post("/postUpload", function(req, res){
+router.post("/postUpload", isAuth, async function(req, res){
     var img = req.files.postImg;
-    var imgName = img.name;
+    var imgName = req.session.username + "-" + img.name;
+
+    var capInput = req.body.postCaption.toString();
 
     // Redirect to upload folder
-    img.mv(path.resolve(__dirname + '/..', 'public/images/posts', imgName));
+    await img.mv(path.resolve(__dirname + '/..', 'public/images/posts', imgName));
 
-    // TO-DO: Adding to Database here***
+    const post = new Post({
+        username: req.session.username,
+        dateCreated: new Date(),
+        caption: capInput,
+        img: imgName,
+        upvotes: 0,
+        downvotes: 0
+    })
+
+    post.save()
+        .then((result) => {
+            res.redirect("/postCreate");
+        })
+        .catch((err) =>{
+            res.send(err);
+        });
+
+    // const report = new RepPost({
+    //     postID: req.params.id,
+    //     reporterUser: req.session.username, 
+    //     remarks: repType
+    // });
+
+    // report.save()
+    //     .then((result) => {
+    //         res.redirect("/post/" + req.params.id);
+    //     })
+    //     .catch((err) =>{
+    //         res.send(err);
+    //     });
 });
 
 // ============== Post Viewing ==============
 
-router.get("/post/:id", function(req, res){
+router.get("/post/:id", async function(req, res){
     const postID = req.params.id;
 
-    Post.findById(postID).then((postRes) =>{
+    await Post.findById(postID).then((postRes) =>{
         Comment.find({postID: postID}).then((commRes) => {
             User.findOne({username: postRes.username}).then((userRes) => {
                 res.render("postView", {
@@ -61,11 +92,11 @@ router.get("/post/:id", function(req, res){
 
 // ============== Post Reporting ==============
 
-router.post("/postReport/:id", function(req, res){
+router.post("/postReport/:id", isAuth, async function(req, res){
     const postID = req.params.id;
     console.log(postID)
 
-    Post.findById(postID)
+    await Post.findById(postID)
         .then((results) => {
             res.render("reportPost", {
                 title: "Report Post",
@@ -77,19 +108,18 @@ router.post("/postReport/:id", function(req, res){
         });
 });
 
-router.post("/confirmPostReport/:id", function(req, res){
+router.post("/confirmPostReport/:id", isAuth, async function(req, res){
     var repType = req.body.reportType;
 
     console.log(repType);
 
     const report = new RepPost({
         postID: req.params.id,
-        // TO-DO: Replace "reporterUser with Logged-In User"
-        reporterUser: "pop", 
+        reporterUser: req.session.username, 
         remarks: repType
     });
 
-    report.save()
+    await report.save()
         .then((result) => {
             res.redirect("/post/" + req.params.id);
         })
@@ -101,12 +131,12 @@ router.post("/confirmPostReport/:id", function(req, res){
 
 // ============== Post Voting ==============
 
-router.post("/vote/:idpost/:voter", function(req, res){
+router.post("/vote/:idpost/:voter", async function(req, res){
     var postID = req.params.idpost;
     var voter = req.params.voter;
     var action = req.body.voteBtn;
 
-    Vote.findOne({username: voter, postID: postID}).then((voteRes) => {
+    await Vote.findOne({username: voter, postID: postID}).then((voteRes) => {
         if(voteRes === null){
             const addVote = new Vote({
                 postID: postID,
@@ -118,7 +148,6 @@ router.post("/vote/:idpost/:voter", function(req, res){
                 res.redirect("/post/" + postID);
             }).catch((err) =>{
                 res.send(err);
-
                 res.redirect("/post/" + postID);
             });
         }else{
@@ -130,10 +159,11 @@ router.post("/vote/:idpost/:voter", function(req, res){
 })
 
 // ============== Post Searching ==============
-router.get("/search", function(req, res){
+router.get("/search", async function(req, res){
     const searchInput = req.query.searchInput;
     console.log(searchInput);
-    Post.find({caption: searchInput}).then((results)=>{
+
+    await Post.find({caption: searchInput}).then((results)=>{
         res.render("search", {
             title: "Search Results",
             posts: results

@@ -6,9 +6,11 @@
         <div class="view-post-comment-options">
             <!-- TO-DO - DATABASE NEED: If NOT OWNED by User, put REPORT BUTTON; Otherwise, if OWNED by User, put DELETE and EDIT BUTTON -->
             <!-- TO-DO - Add BUTTON for Edit Comment -->
-            <form action="/commReport/<%= post._id %>/<%= comment._id %>" method="post">
-                <button id="report-comment"><i class="bi bi-flag-fill"></i> REPORT</button>
-            </form>
+            <%if(session.isLoggedIn){%>
+                <form action="/commReport/<%= post._id %>/<%= comment._id %>" method="post">
+                    <button id="report-comment"><i class="bi bi-flag-fill"></i> REPORT</button>
+                </form>
+            <%}%>
         </div>
     </div>
     <div class="view-post-comment-content">

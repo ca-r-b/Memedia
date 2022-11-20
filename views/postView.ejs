@@ -1,51 +1,56 @@
 <div class="view-post-container">
     <div class="view-post-user">
         <div class="view-post-user-prof">
-            <!-- TO-DO - DATABASE NEED: REPLACE with ACTUAL image of User -->
             <img src="/images/pfps/<%= user.img %>">
         </div>
         <div class="view-post-user-name">
-            <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Username -->
             <a href="/user/<%= post.username %>"><%= post.username %></a>
-            <hr>
-            <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Date of Post -->
+            <hr/>
             <p>Posted on: <%= post.dateCreated.toDateString() %></p>
         </div>
     </div>
     <hr>
 
     <div class="view-post-title">
-        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Post Caption -->
         <h2><%= post.caption %></h2>
     </div>
+    <hr/>
     <div class="view-post-stats">
-                <!-- TO-DO - Replace "popCat" with real user -->
-        <form action="/vote/<%= post._id%>/popCat" method="post" id="post-vote-form">
-            <button name="voteBtn" value="1" id="upVote" type="submit">
-                <i id="post-upv" class="bi bi-caret-up"></i>
-                <p>UPVOTE</p>
-            </button>
-            <button name="voteBtn" value="0" id="downVote" type="submit">
-                <i id="post-dv" class="bi bi-caret-down"></i>
-                <p>DOWNVOTE</p>
-            </button>
-        </form>
+        <% if(session.isLoggedIn){ %>
+            <form action="/vote/<%= post._id%>/<%= session.username %>" method="post" id="post-vote-form">
+                    <button name="voteBtn" value="1" id="upVote" type="submit">
+                        <i id="post-upv" class="bi bi-caret-up"></i>
+                        <p>UPVOTE</p>
+                    </button>
+                    <button name="voteBtn" value="0" id="downVote" type="submit">
+                        <i id="post-dv" class="bi bi-caret-down"></i>
+                        <p>DOWNVOTE</p>
+                    </button>
+                
+            </form>
+        <% } %>
 
         <p id="view-post-count">VOTE COUNT: <%= post.upvotes - post.downvotes %></p>
 
         <!-- Remove vote -->
-        <form id="post-vote-form">
-            <button id="view-post-remove-vote" name="removeVote" type="submit">Remove Vote</button>
-        </form>
+        <% if(session.isLoggedIn){ %>
+            <form id="post-vote-form">
+                <button id="view-post-remove-vote" name="removeVote" type="submit">Remove Vote</button>
+            </form>
+        <% } %>
 
         <div class="view-post-stats-others">
-
-            <form action="/postReport/<%= post._id %>" method="post">
-                <!-- TO-DO - ADD Check if it is OWNED by User; if OWNED by User, remove REPORT btn / Otherwise, remove DELETE btn -->
-                <button type="submit" id="post-report"><i class="bi bi-flag-fill"></i> REPORT</button>
-            </form>
-            <!-- TO-DO - ADD <form> + Put ACTION and METHOD for DELETE button -->
-            <!-- <button id="post-delete"><i class="bi bi-trash3-fill"></i> DELETE</button> -->
+            <% if(session.isLoggedIn){ %>
+                <% if (session.username === post.username) { %>
+                    <form action="/postDelete/<%= post._id %>" method="post">
+                        <button type="submit" id="post-delete"><i class="bi bi-trash-fill"></i> DELETE</button>
+                    </form>
+                <% } else { %>
+                    <form action="/postReport/<%= post._id %>" method="post">
+                        <button type="submit" id="post-report"><i class="bi bi-flag-fill"></i> REPORT</button>
+                    </form>
+                <% } %>
+            <% } %>
         </div>
     </div>
     <br />
@@ -61,23 +66,22 @@
             <h2>Comments Section</h2>
             <hr/>
         </div>
-        <!-- TO-DO - DATABASE NEEDED: Check if User is LOGGED IN; Disable "Comment" button if NOT logged in -->
         <div class="view-post-comment-add">
-            <!-- TO-DO - Add action -->
-            <form action="#">
-                <div class="input-group mb-3">
-                    <input type="text" minlength="3" maxlength="256" class="form-control" placeholder="Comment Here..." aria-label="Recipient's username" aria-describedby="button-addon2" required/>
-                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Comment</button>
-                </div>
-            </form>
+            <% if(session.isLoggedIn){ %>
+                <!-- TO-DO - Add action -->
+                <form action="#">
+                    <div class="input-group mb-3">
+                        <input type="text" minlength="3" maxlength="256" class="form-control" placeholder="Comment Here..." aria-label="Recipient's username" aria-describedby="button-addon2" required/>
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Comment</button>
+                    </div>
+                </form>
+            <% } %>
         </div>
-        <!-- TO-DO - DATABASE NEEDED: Get comments of post -->
-        <!-- TO-DO - ADD: Iterate here + Variable being passed -->
-
         <% if (comments.length > 0) {%> 
             <% comments.forEach(comment => { %> 
                 <%- include("./partials/comment.ejs", {comment: comment}) %>
             <% }) %> 
         <% } %>
     </div>
+    
 </div>

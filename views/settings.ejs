@@ -1,12 +1,13 @@
 <!-- Side Container -->
 <aside class="accSet-side">
-    <button onclick="window.history.back()">Go to Back to Previous Page</button>
+    <a href="/user/<%= user.username %>"><button>Go to Profile Page</button></a>
     <h2>Account Settings</h2>
     <hr>
     <ul>
         <li>Personal Information</li>
         <li>Sign In Details</li>
-        <li>User Profile</li>
+        <li>Profile Picture</li>
+        <li>Profile Biography</li>
     </ul>
 </aside>
 
@@ -15,7 +16,7 @@
     <!-- Section 1 Container -->
     <div class="accSet-box">
         <div class="accSet-header">
-            <h2 id="accSetSec1">PERSONAL INFORMATION</h2>
+            <h2 id="accSetSec1">EMAIL ADDRESS</h2>
             <p>
                 This information is private and will not be shared with other people.
             </p>
@@ -25,7 +26,7 @@
                 1. Add ACTION and METHOD to <form>
                 2. Update database after clicking "Save Changes"         
             -->
-            <form action="/settings/update1/<%= user._id %>" method="post">
+            <form action="/settings/updateEmail/<%= user.username %>" method="post">
                 <label><b>E-MAIL ADDRESS</b></label><br />
                 <input type="email" name="updEmail" placeholder="Update E-Mail Address. . ." value="<%= user.email %>" required>
                 <br/>
@@ -47,9 +48,9 @@
                 1. Add ACTION and METHOD to <form>
                 2. Update database after clicking "Save Changes"         
             -->
-            <form action="/settings/update2/<%= user._id %>" method="post">
+            <form action="/settings/updatePass/<%= user.username %>" method="post">
                 <label><b>PASSWORD</b></label><br />
-                <input type="password" name="updPass" placeholder="Update Password. . ." value="<%= user.password %>" required>
+                <input type="password" name="updPass" placeholder="Update Password. . ." value="<%= user.password %>" minlength="8" maxlength="16" required>
                 <br/>
                 <button type="submit">Save Changes</button>
             </form>
@@ -58,9 +59,9 @@
     <!-- Section 3 Container-->
     <div class="accSet-box">
         <div class="accSet-header">
-            <h2 id="accSetSec3">USER PROFILE</h2>
+            <h2 id="accSetSec3">PROFILE PICTURE</h2>
             <p>
-                Edit your profile picture or the bio displayed on your profile page.
+                Replace the profile picture displayed on your profile page.
             </p>
         </div>
         <div class="accSet-field">
@@ -68,12 +69,31 @@
                 1. Add ACTION and METHOD to <form>
                 2. Update database after clicking "Save Changes"         
             -->
-            <form action="/settings/update3/<%= user._id %>" method="post">
+            <form action="/settings/updatePfp/<%= user.username %>" method="post">
                 <label><b>PROFILE PICTURE</b></label><br />
                 <input class="accSet-input2" type="file" name="updPfp" accept="image/png, image/jpg, image/jpeg" required><br />
+                <button type="submit" name="updPfp">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Section 4 Container-->
+    <div class="accSet-box">
+        <div class="accSet-header">
+            <h2 id="accSetSec3">PROFILE BIOGRAPHY</h2>
+            <p>
+                Edit the biography displayed on your profile page.
+            </p>
+        </div>
+        <div class="accSet-field">
+            <!-- TO-DO - DATABASE NEEDED:
+                1. Add ACTION and METHOD to <form>
+                2. Update database after clicking "Save Changes"         
+            -->
+            <form action="/settings/updateBio/<%= user.username %>" method="post">
                 <label><b>BIOGRAPHY</b></label><br />
-                <textarea class="accSet-input3" name="updBio" rows="7px" cols="50px"  minlength="3" maxlength="200" required></textarea><br /><br />
-                <button type="submit" name="updProf">Save Changes</button>
+                <textarea class="accSet-input3" name="updBio" rows="7px" cols="50px"  minlength="3" maxlength="200" required><%= user.bio %></textarea><br /><br />
+                <button type="submit" name="updBio">Save Changes</button>
             </form>
         </div>
     </div>

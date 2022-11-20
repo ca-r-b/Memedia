@@ -20,7 +20,7 @@ const isAuth = (req, res, next) =>{
 
 // ============== Comment Reporting ==============
 
-router.post("/commReport/:idpost/:idcomm", function(req, res){
+router.post("/commReport/:idpost/:idcomm", isAuth,function(req, res){
     const postID = req.params.idpost;
     const commentID = req.params.idcomm;
     console.log(postID)
@@ -45,7 +45,7 @@ router.post("/commReport/:idpost/:idcomm", function(req, res){
     
 });
 
-router.post("/confirmCommReport/:idpost/:idcomm", function(req, res){ 
+router.post("/confirmCommReport/:idpost/:idcomm", isAuth, function(req, res){ 
     var commentID = req.params.idcomm;
     var postID = req.params.idpost;
     var repType = req.body.reportType;
@@ -71,7 +71,7 @@ router.post("/confirmCommReport/:idpost/:idcomm", function(req, res){
 
 // ============== Comment Editing ==============
 
-router.get("/commEdit", function(req, res){
+router.get("/commEdit", isAuth, function(req, res){
     res.render("commEdit", {title: "Your Main Source of Fun"});
 });
 

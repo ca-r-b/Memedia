@@ -37,6 +37,8 @@ router.get("/user/:profileName", function(req, res){
         });
 });
 
+// Settings
+
 router.get("/settings/:profileName", isAuth, function(req, res){
     const profileName = req.params.profileName;
 
@@ -56,5 +58,40 @@ router.get("/settings/:profileName", isAuth, function(req, res){
     }
 
 });
+
+// Settings Update - Email
+router.post("/settings/updateEmail/:profileName", isAuth, async function(req, res){
+    const profileName = req.params.profileName;
+    var emailInput = req.body.updEmail;
+
+    await User.updateOne({username: profileName},{$set: {email: emailInput}});
+
+    req.session.email = await emailInput;
+
+    res.redirect("/settings/" + profileName);
+});
+
+// Settings Update - Password
+router.post("/settings/updatePass/:profileName", isAuth, async function(req, res){
+    const profileName = req.params.profileName;
+    var passInput = req.body.updPass;
+
+    await User.updateOne({username: profileName},{$set: {password: passInput}});
+
+    res.redirect("/settings/" + profileName);
+});
+
+// Settings Update - Biography
+router.post("/settings/updateBio/:profileName", isAuth, async function(req, res){
+    const profileName = req.params.profileName;
+    var bioInput = req.body.updBio.toString();
+
+    bioInput = bioInput.slice(0, -1);
+
+    await User.updateOne({username: profileName},{$set: {bio: bioInput}});
+
+    res.redirect("/settings/" + profileName);
+});
+
 
 module.exports = router;
