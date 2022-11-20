@@ -1,23 +1,18 @@
 <% if(!session.isLoggedIn){ %>
     <%- include( "./partials/carousel.ejs") %> 
+<% } else { %>
+    <div class="home-h1-containter">
+        <a href="home"><h1 class="home-h1">WHAT'S POPPIN'?</h1></a>
+    </div>
 <% } %>
 
-<div class="home-h1-containter">
-    <a href="home"><h1 class="home-h1">WHAT'S POPPIN'?</h1></a>
-</div>
-
 <div class = "post-container">
-    <!-- 
-        TO-DO:
-        1. Add For-Loop [Iterate through database / Show all posts]
-        2. User redirection [Logged in]
-     -->
-
+    <h1 id="nav-no-search">SEARCH RESULTS</h1>
     <% if (posts.length > 0) {%> 
         <% posts.forEach(post => { %> 
             <%- include("./partials/postBox.ejs", {post: post}) %>
         <% }) %> 
     <% }else { %>
-        <h1 id="nav-no-search">We can't seem to find what you're looking for...</h1>
+        <h2 id="nav-no-search">We can't seem to find what you're looking for...</h2>
     <% } %>
 </div>

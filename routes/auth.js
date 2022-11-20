@@ -40,8 +40,6 @@ router.post("/login", async function(req, res){
     req.session.isAuth = true;
     req.session.isLoggedIn = true;
     req.session.username = loggedUser.username;
-    req.session.email = loggedUser.email;
-    req.session.bio = loggedUser.bio;
     req.session.img = loggedUser.img;
     res.redirect("/home");
 })

@@ -569,6 +569,20 @@ body{
     margin-bottom: 20px;
 }
 
+#accSet-img{
+    background-color: #9A8C98;
+    background-image: url(/images/defaults/no-file.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    height: 500px;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
 .accSet-input3{
     border-radius: 10px;
     resize: none;

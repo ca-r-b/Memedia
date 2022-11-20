@@ -56,7 +56,7 @@
     <br />
     <div class="view-post-content">
         <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Post Image -->
-        <img class="post-content" src="/images/posts/<%= post.img %>" alt="Eyebrow Cat">
+        <img class="post-content" src="/images/posts/<%= post.img %>">
     </div>
     <br>
 
@@ -69,9 +69,9 @@
         <div class="view-post-comment-add">
             <% if(session.isLoggedIn){ %>
                 <!-- TO-DO - Add action -->
-                <form action="#">
+                <form action="/addComment/<%= post._id %>" method="post">
                     <div class="input-group mb-3">
-                        <input type="text" minlength="3" maxlength="256" class="form-control" placeholder="Comment Here..." aria-label="Recipient's username" aria-describedby="button-addon2" required/>
+                        <input name="commentInput" type="text" minlength="3" maxlength="256" class="form-control" placeholder="Comment Here..." aria-label="Recipient's username" aria-describedby="button-addon2" required/>
                         <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Comment</button>
                     </div>
                 </form>

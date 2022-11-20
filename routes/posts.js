@@ -48,20 +48,6 @@ router.post("/postUpload", isAuth, async function(req, res){
         .catch((err) =>{
             res.send(err);
         });
-
-    // const report = new RepPost({
-    //     postID: req.params.id,
-    //     reporterUser: req.session.username, 
-    //     remarks: repType
-    // });
-
-    // report.save()
-    //     .then((result) => {
-    //         res.redirect("/post/" + req.params.id);
-    //     })
-    //     .catch((err) =>{
-    //         res.send(err);
-    //     });
 });
 
 // ============== Post Viewing ==============
@@ -161,9 +147,8 @@ router.post("/vote/:idpost/:voter", async function(req, res){
 // ============== Post Searching ==============
 router.get("/search", async function(req, res){
     const searchInput = req.query.searchInput;
-    console.log(searchInput);
 
-    await Post.find({caption: searchInput}).then((results)=>{
+    await Post.find({caption: {$regex: new RegExp(searchInput)}}).then((results)=>{
         res.render("search", {
             title: "Search Results",
             posts: results

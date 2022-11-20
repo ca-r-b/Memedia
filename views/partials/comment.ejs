@@ -1,24 +1,28 @@
-<!-- For Loop for every comment -->
 <div class="view-post-comment-user">
     <div class="view-post-comment-name">
-        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Username -->
         <a href="#"><%= comment.username %></a>
         <div class="view-post-comment-options">
-            <!-- TO-DO - DATABASE NEED: If NOT OWNED by User, put REPORT BUTTON; Otherwise, if OWNED by User, put DELETE and EDIT BUTTON -->
-            <!-- TO-DO - Add BUTTON for Edit Comment -->
             <%if(session.isLoggedIn){%>
-                <form action="/commReport/<%= post._id %>/<%= comment._id %>" method="post">
-                    <button id="report-comment"><i class="bi bi-flag-fill"></i> REPORT</button>
-                </form>
+                <% if(session.username == comment.username){ %>
+                    <!-- To Do: Add Delete and Edit -->
+                    <form action="#" method="post">
+                        <button id="report-comment"><i class="bi bi-trash-fill"></i> DELETE</button>
+                    </form>
+                    <form action="#" method="post">
+                        <button id="report-comment"><i class="bi bi-pencil-fill"></i> EDIT</button>
+                    </form>
+                <% } else { %>
+                    <form action="/commReport/<%= post._id %>/<%= comment._id %>" method="post">
+                        <button id="report-comment"><i class="bi bi-flag-fill"></i> REPORT</button>
+                    </form>
+                <% } %>
             <%}%>
         </div>
     </div>
     <div class="view-post-comment-content">
-        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Comment -->
         <p><%= comment.content %></p>
     </div>
     <div class="view-post-comment-date">
-        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Date Creation -->
-        <i class="bi bi-clock"></i> Commented on: <%= post.dateCreated.toDateString() %>
+        <i class="bi bi-clock"></i> Commented on: <%= comment.date.toDateString() %>
     </div>
 </div>

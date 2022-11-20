@@ -16,11 +16,29 @@ const isAuth = (req, res, next) =>{
 };
 
 // ============== Comment Adding ==============
+router.post("/addComment/:idpost", isAuth, function(req, res){
+    const idpost = req.params.idpost;
+    const commentContent = req.body.commentInput;
 
+    const comment = new Comment({
+        postID: idpost,
+        username: req.session.username,
+        date: new Date(),
+        content: commentContent
+    })
+
+    comment.save()
+         .then((result) => {
+            res.redirect("/post/" + idpost);
+        })
+        .catch((err) =>{
+            res.send(err);
+        });
+})
 
 // ============== Comment Reporting ==============
 
-router.post("/commReport/:idpost/:idcomm", isAuth,function(req, res){
+router.post("/commReport/:idpost/:idcomm", isAuth, function(req, res){
     const postID = req.params.idpost;
     const commentID = req.params.idcomm;
     console.log(postID)

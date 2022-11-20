@@ -71,7 +71,8 @@
             -->
             <form action="/settings/updatePfp/<%= user.username %>" method="post">
                 <label><b>PROFILE PICTURE</b></label><br />
-                <input class="accSet-input2" type="file" name="updPfp" accept="image/png, image/jpg, image/jpeg" required><br />
+                <div id="accSet-img"></div>
+                <input id="accSet-img-input" class="accSet-input2" type="file" name="updPfp" accept="image/png, image/jpg, image/jpeg" required><br />
                 <button type="submit" name="updPfp">Save Changes</button>
             </form>
         </div>
