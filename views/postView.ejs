@@ -17,12 +17,12 @@
     <hr/>
     <div class="view-post-stats">
         <% if(session.isLoggedIn){ %>
-            <form action="/vote/<%= post._id%>/<%= session.username %>" method="post" id="post-vote-form">
+            <form action="/vote/<%= post._id%>" method="post" id="post-vote-form">
                     <button name="voteBtn" value="1" id="upVote" type="submit">
                         <i id="post-upv" class="bi bi-caret-up"></i>
                         <p>UPVOTE</p>
                     </button>
-                    <button name="voteBtn" value="0" id="downVote" type="submit">
+                    <button name="voteBtn" value="-1" id="downVote" type="submit">
                         <i id="post-dv" class="bi bi-caret-down"></i>
                         <p>DOWNVOTE</p>
                     </button>

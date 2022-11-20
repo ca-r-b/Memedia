@@ -117,34 +117,38 @@ router.post("/confirmPostReport/:id", isAuth, async function(req, res){
 
 // ============== Post Voting ==============
 
-router.post("/vote/:idpost/:voter", async function(req, res){
-    var postID = req.params.idpost;
-    var voter = req.params.voter;
+router.post("/vote/:id", async function(req, res){
+    var postID = req.params.id;
+    var voter = req.session.username;
     var action = req.body.voteBtn;
 
-    await Vote.findOne({username: voter, postID: postID}).then((voteRes) => {
-        if(voteRes === null){
-            const addVote = new Vote({
-                postID: postID,
-                username: voter,
-                vote: action
-            });
+    const vote = await Vote.findOne({username: voter, postID: postID});
 
-            addVote.save().then((result) => {
-                res.redirect("/post/" + postID);
+    // add this to visit post maybe?
+    // maybe itira lang yung update?
+    // remove vote == 0
+    if(!vote){
+        const addVote = new Vote({
+            postID: postID,
+            username: voter,
+            vote: action
+        });
+    
+        addVote.save()
+            .then((result) => {
+                console.log("Success.");
             }).catch((err) =>{
-                res.send(err);
-                res.redirect("/post/" + postID);
+                console.log(err);
             });
-        }else{
-            // TO-DO: Update vote
-        }
-    }).catch((err) => {
-        console.log(err);
-    })
+    }else{
+        await Vote.updateOne({username: vote.username, postID: vote.postID}, {$set: {vote: action}});
+    }
+
+    res.redirect("/post/" + postID);
 })
 
 // ============== Post Searching ==============
+
 router.get("/search", async function(req, res){
     const searchInput = req.query.searchInput;
 

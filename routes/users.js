@@ -1,7 +1,8 @@
 const express = require("express");
-const Post = require("../models/posts");
-const User = require("../models/users");
 const router = express.Router();
+const path = require('path');
+const Post = require("../models/posts");
+const User = require("../models/users"); 
 
 // Session Checking - Check if authenticated
 const isAuth = (req, res, next) =>{
@@ -16,7 +17,6 @@ const isAuth = (req, res, next) =>{
 
 router.get("/user/:profileName", function(req, res){
     const profileName = req.params.profileName;
-    console.log(profileName);
 
     User.findOne({username: profileName})
         .then((userRes) =>{
@@ -66,8 +66,6 @@ router.post("/settings/updateEmail/:profileName", isAuth, async function(req, re
 
     await User.updateOne({username: profileName},{$set: {email: emailInput}});
 
-    req.session.email = await emailInput;
-
     res.redirect("/settings/" + profileName);
 });
 
@@ -80,6 +78,22 @@ router.post("/settings/updatePass/:profileName", isAuth, async function(req, res
 
     res.redirect("/settings/" + profileName);
 });
+
+// Settings Update - Profile Picture
+router.post("/settings/updatePfp/:profileName", isAuth, async function(req, res){
+    const profileName = req.params.profileName;
+    var img = req.files.updPfp;
+    var imgName = req.session.username + "-" + img.name;
+
+    // Redirect to upload folder
+    await img.mv(path.resolve(__dirname + '/..', 'public/images/pfps', imgName));
+    await User.updateOne({username: profileName},{$set: {img: imgName}});
+
+    req.session.img = imgName;
+
+    res.redirect("/settings/" + profileName);
+});
+
 
 // Settings Update - Biography
 router.post("/settings/updateBio/:profileName", isAuth, async function(req, res){
