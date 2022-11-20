@@ -1,4 +1,8 @@
-<%- include( "./partials/carousel.ejs") %> 
+<% if(!session.isLoggedIn){ %>
+    <%- include( "./partials/carousel.ejs") %> 
+<% } else { %>
+    <br/>
+<% } %>
 
 <div class="home-h1-containter">
     <a href="home"><h1 class="home-h1">WHAT'S POPPIN'?</h1></a>

@@ -3,6 +3,15 @@ const Post = require("../models/posts");
 const User = require("../models/users");
 const router = express.Router();
 
+// Session Checking - Check if authenticated
+const isAuth = (req, res, next) =>{
+    if(req.session.isAuth){
+        next();
+    }else{
+        res.redirect("/login");
+    }
+};
+
 // TO-DO - DATABASE NEEDED: Add .post of routes
 
 router.get("/user/:profileName", function(req, res){
@@ -28,8 +37,24 @@ router.get("/user/:profileName", function(req, res){
         });
 });
 
-router.get("/settings", function(req, res){
-    res.render("settings", {title: "Account Settings"});
+router.get("/settings/:profileName", isAuth, function(req, res){
+    const profileName = req.params.profileName;
+
+    if(profileName === req.session.username){
+        User.findOne({username: profileName})
+        .then((userRes) =>{
+            res.render("settings", {
+                title: "Account Settings",
+                user: userRes
+            });
+        })
+        .catch((err) =>{
+            console.log(err);
+        });
+    }else{
+        res.redirect("/");
+    }
+
 });
 
 module.exports = router;

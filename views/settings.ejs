@@ -25,12 +25,11 @@
                 1. Add ACTION and METHOD to <form>
                 2. Update database after clicking "Save Changes"         
             -->
-            <form action="#">
+            <form action="/settings/update1/<%= user._id %>" method="post">
                 <label><b>E-MAIL ADDRESS</b></label><br />
-                <input type="email" name="updEmail" placeholder="Update E-Mail Address. . ."><br />
-                <label><b>FULL NAME</b></label><br />
-                <input type="text" name="updName" placeholder="Update Full Name . . ."><br />
-                <button type="submit" name="updPI">Save Changes</button>
+                <input type="email" name="updEmail" placeholder="Update E-Mail Address. . ." value="<%= user.email %>" required>
+                <br/>
+                <button type="submit">Save Changes</button>
             </form>
         </div>
     </div>
@@ -48,12 +47,11 @@
                 1. Add ACTION and METHOD to <form>
                 2. Update database after clicking "Save Changes"         
             -->
-            <form action="#">
-                <label><b>USERNAME</b></label><br />
-                <input type="email" name="updUsername" placeholder="Update Username. . ."><br />
+            <form action="/settings/update2/<%= user._id %>" method="post">
                 <label><b>PASSWORD</b></label><br />
-                <input type="password" name="updPass" placeholder="Update Password. . ."><br />
-                <button type="submit" name="updSI">Save Changes</button>
+                <input type="password" name="updPass" placeholder="Update Password. . ." value="<%= user.password %>" required>
+                <br/>
+                <button type="submit">Save Changes</button>
             </form>
         </div>
     </div>
@@ -70,11 +68,11 @@
                 1. Add ACTION and METHOD to <form>
                 2. Update database after clicking "Save Changes"         
             -->
-            <form action="#">
+            <form action="/settings/update3/<%= user._id %>" method="post">
                 <label><b>PROFILE PICTURE</b></label><br />
-                <input class="accSet-input2" type="file" name="updPfp" accept="image/png, image/jpg, image/jpeg"><br />
+                <input class="accSet-input2" type="file" name="updPfp" accept="image/png, image/jpg, image/jpeg" required><br />
                 <label><b>BIOGRAPHY</b></label><br />
-                <textarea class="accSet-input3" name="updBio" rows="7px" cols="50px"></textarea><br /><br />
+                <textarea class="accSet-input3" name="updBio" rows="7px" cols="50px"  minlength="3" maxlength="200" required></textarea><br /><br />
                 <button type="submit" name="updProf">Save Changes</button>
             </form>
         </div>

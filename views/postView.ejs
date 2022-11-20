@@ -19,31 +19,14 @@
         <h2><%= post.caption %></h2>
     </div>
     <div class="view-post-stats">
-        <!-- GENERAL TO-DO - DATABASE + JS NEED: Add functionality 
-            1. User can only vote for 1 (e.g. Kung nag-Upvote siya then pinagchange to Downvote, mawawala Upvote niya)
-            2. Update vote count database
-            3. Add action to <form>
-        -->
-
-        <!-- ID of <form> is for CSS purposes -->
-        <!-- Note: REMOVE <form> if you think it is not necessary -->
                 <!-- TO-DO - Replace "popCat" with real user -->
         <form action="/vote/<%= post._id%>/popCat" method="post" id="post-vote-form">
-            <!-- TO-DO - DATABASE NEED: 
-                Replace ICON with "bi bi-caret-*up or down* FILLED" if CLICKED 
-                1. Add If-Else statement to check if User has voted on post
-                2. If User has voted on post, check if it is Upvote or Downvote
-                    - Make sure that Up/Downvote button's icon is changed if pressed by user
-                3. If User has voted on post, make sure yung itsura ng BUTTON [yung vinote nya] and the COUNT OF VOTES ARE UPDATED
-            -->
             <button name="voteBtn" value="1" id="upVote" type="submit">
                 <i id="post-upv" class="bi bi-caret-up"></i>
-                <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
                 <p>UPVOTE</p>
             </button>
             <button name="voteBtn" value="0" id="downVote" type="submit">
                 <i id="post-dv" class="bi bi-caret-down"></i>
-                <!-- TO-DO - DATABASE NEED: Replace with ACTUAL Vote Count -->
                 <p>DOWNVOTE</p>
             </button>
         </form>

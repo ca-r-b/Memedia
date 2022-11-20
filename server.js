@@ -3,6 +3,11 @@ const expressLayouts = require("express-ejs-layouts");
 const fileUpload = require("express-fileupload");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+const mongoURI = "mongodb://localhost:27017/memedia";
+
+// Session
+const session = require("express-session");
+const MongoDBSession = require("connect-mongodb-session")(session);
 
 // Schemas
 const Comment = require("./models/comments.js");
@@ -15,9 +20,14 @@ const User = require("./models/users.js");
 const app = express();
 
 // Setup MongoDB Connection
-mongoose.connect("mongodb://localhost:27017/memedia", {useNewUrlParser: true})
+mongoose.connect(mongoURI, {useNewUrlParser: true})
     .then((result) => console.log("Connected to DB!"))
     .catch((err) => console.log(err));
+
+const store = new MongoDBSession({
+    uri: mongoURI,
+    collection: "sessions"
+})
 
 // Setup routes
 const authRouter = require("./routes/auth.js");
@@ -34,16 +44,27 @@ app.set('layout', './layouts/main');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
+// Session
+app.use(session({
+    secret: "secretKey",
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+    isLoggedIn: false
+    // cookie: { maxAge: 60000}
+}));
+
+// Store session variables
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+}); 
+
 app.listen(3000, function(){
     console.log("Server now running on port 3000");
 });
 
-// ROUTES
-// NOTE: These routes are TENTATIVE
-//          1. Must be in Routes folder
-//          2. Must use the appropriate HTTP methods (get vs post)
-//          3. SOME ROUTES COULD STILL BE MISSING
-
+// Routes
 app.use("/", authRouter );
 app.use("/", commentsRouter);
 app.use("/", indexRouter);

@@ -8,9 +8,18 @@ const RepComment = require("../models/reportComments");
 const RepPost = require("../models/reportPosts");
 const Vote = require("../models/votes");
 
+// Session Checking - Check if authenticated
+const isAuth = (req, res, next) =>{
+    if(req.session.isAuth){
+        next();
+    }else{
+        res.redirect("/login");
+    }
+};
+
 // ============== Post Uploading ==============
 
-router.get("/postCreate", function(req, res){
+router.get("/postCreate", isAuth, function(req, res){
     res.render("postCreate", {title: "Post Your Meme"});
 });
 
