@@ -7,15 +7,6 @@ const RepComment = require("../models/reportComments");
 const RepPost = require("../models/reportPosts");
 const Vote = require("../models/votes");
 
-// Session Checking - Check if authenticated
-const isAuth = (req, res, next) =>{
-    if(req.session.isAuth){
-        next();
-    }else{
-        res.redirect("/login");
-    }
-};
-
 // Login
 router.get("/login", function(req, res){
     if(!req.session.isLoggedIn){

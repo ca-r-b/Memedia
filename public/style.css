@@ -606,7 +606,7 @@ body{
     font-size: 20px;
     float: left;
     position: fixed;
-    margin-top: 90px;
+    margin-top: 70px;
     margin-left: 60px;
     text-align: center;
     width: 300px;
@@ -630,6 +630,11 @@ body{
 
 .accSet-side ul li{
     text-align: left;
+}
+
+.accSet-side-note{
+    color: rgb(212, 212, 212);
+    font-size: 15px
 }
 
 /* ==========  HOME PAGE ========== */
@@ -786,15 +791,6 @@ body{
 #post-delete:hover{
     color: #22223B;
 }
-
-/* #post-upv, #post-dv, #post-comment-icon, #post-delete, #post-report{
-    color: #dbc8c3;
-    transition: all 0.2s;
-}
-
-#post-upv:hover, #post-dv:hover, #post-comment-icon:hover, #post-delete:hover, #post-report:hover{
-    color: #22223B;
-} */
 
 .post-footer-sub{
    text-align: right;
@@ -982,6 +978,7 @@ body{
     border-radius: 10px;
     border-style: none;
     color: #22223B;
+    font-size: 15px;
     transition: all 0.2s;
 }
 
@@ -1008,6 +1005,10 @@ body{
     font-size: 13px;
     margin-top: 3px;
     margin-left: 3px;
+}
+
+#view-post-comment-form{
+    display: inline;
 }
 
 #view-post-remove-vote{
@@ -1098,6 +1099,7 @@ body{
 }
 
 .profile-bio h2{
+    color:#393037;
     padding-top: 10px;
     padding-left: 300px;
 }
@@ -1143,6 +1145,7 @@ body{
 }
 
 .edit-comment-header h3{
+    font-family: 'Concert One', cursive;
     font-size: 25px;
 }
 
@@ -1168,6 +1171,7 @@ body{
 #edit-comment-save{
     border: none;
     border-radius: 10px;
+    font-family: 'Concert One', cursive;
     padding: 7px;
     transition: all 0.2s;
 }
@@ -1175,19 +1179,23 @@ body{
 #edit-comment-cancel{
     border: none;
     border-radius: 10px;
+    font-family: 'Concert One', cursive;
     margin-top: 20px;
-    padding: 7px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
     transition: all 0.2s;
 }
 
 #edit-comment-save:hover, #edit-comment-cancel:hover{
-    background-color: #22223B;
-    box-shadow: 0px 0px 10px white;
+    background-color: #9A8C98;
     color: white;
 }
 
 /* ==========  EDIT COMMENT ========== */
 .report-container{
+    font-family: 'Concert One', cursive;
     border-radius: 15px;
     font-size: 20px;
     margin-top: 130px;
@@ -1220,11 +1228,15 @@ body{
 
 #report-comment-container{
     border-style: solid;
-    border-color: #22223B;
+    border-color: red;
     border-width: 1px;
     border-radius: 10px;
+    color: red;
+    font-family: 'Oswald', sans-serif;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
     width: 500px;
 }
 
@@ -1255,4 +1267,7 @@ body{
 
 #report-cancel{
     margin-top: 15px;
+    margin-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
 }

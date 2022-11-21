@@ -25,7 +25,7 @@ router.get("/postCreate", isAuth, function(req, res){
 
 router.post("/postUpload", isAuth, async function(req, res){
     var img = req.files.postImg;
-    var imgName = req.session.username + "-" + img.name;
+    var imgName = req.session.username + "-" + Date.now() + "-" + img.name;
 
     var capInput = req.body.postCaption.toString();
 
@@ -99,7 +99,7 @@ router.get("/post/:id", async function(req, res){
         
         const voteOfUser = await Vote.findOne({username: req.session.username, postID: postID});
 
-        res.render("postView", {
+        return res.render("postView", {
             title: "Your Main Source of Fun",
             user: postUser,
             post: post,

@@ -112,7 +112,7 @@ router.post("/settings/updatePass/:profileName", isAuth, async function(req, res
 router.post("/settings/updatePfp/:profileName", isAuth, async function(req, res){
     const profileName = req.params.profileName;
     var img = req.files.updPfp;
-    var imgName = req.session.username + "-" + img.name;
+    var imgName = req.session.username + "-" + Date.now() + "-" + img.name;
 
     // Redirect to upload folder
     await img.mv(path.resolve(__dirname + '/..', 'public/images/pfps', imgName));

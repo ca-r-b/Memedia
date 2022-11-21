@@ -50,6 +50,32 @@ router.post("/addComment/:idpost", isAuth, async function(req, res){
     res.redirect("/post/" + postID);
 })
 
+// ============== Comment Editing ==============
+
+router.get("/editComment/:idpost/:idcomm", async function(req, res){
+    const commentFound = await Comment.findById(req.params.idcomm);
+    const postFound = await Post.findById(req.params.idpost);
+
+    res.render("editComment", {
+        title: "Edit Your Comment",
+        comment: commentFound,
+        post: postFound
+    });
+})
+
+router.post("/editComment/:idpost/:idcomm", isAuth, async function(req, res){
+    const newContent = req.body.editedComment;
+
+    await Comment.updateOne(
+        {_id: req.params.idcomm},
+        {$set: {
+            content: newContent,
+            date: new Date()
+        }})
+
+    res.redirect("/post/" + req.params.idpost);
+})
+
 // ============== Comment Deleting ==============
 
 router.post("/deleteComment/:idpost/:idcomm", isAuth, async function(req, res){
@@ -76,12 +102,12 @@ router.post("/deleteComment/:idpost/:idcomm", isAuth, async function(req, res){
 
 // ============== Comment Reporting ==============
 
-router.post("/commReport/:idpost/:idcomm", isAuth, function(req, res){
+router.get("/commReport/:idpost/:idcomm", isAuth, async function(req, res){
     const postID = req.params.idpost;
     const commentID = req.params.idcomm;
     console.log(postID)
 
-    Post.findById(postID)
+    await Post.findById(postID)
         .then((postRes) =>{
             Comment.findById(commentID)
                 .then((commRes) => {
@@ -101,7 +127,7 @@ router.post("/commReport/:idpost/:idcomm", isAuth, function(req, res){
     
 });
 
-router.post("/confirmCommReport/:idpost/:idcomm", isAuth, function(req, res){ 
+router.post("/commReport/:idpost/:idcomm", isAuth, function(req, res){ 
     var commentID = req.params.idcomm;
     var postID = req.params.idpost;
     var repType = req.body.reportType;
@@ -109,27 +135,20 @@ router.post("/confirmCommReport/:idpost/:idcomm", isAuth, function(req, res){
     console.log(repType);
 
     const report = new RepComment({
-        // TO-DO: Replace "reporterUser with Logged-In User"
-        reporterUser: "pop", 
+        reporterUser: req.session.username, 
         remarks: repType,
         commentID: commentID,
         dateReported: new Date()
     });
 
     report.save()
-        .then((result) => {
+        .then(() => {
             res.redirect("/post/" + postID);
         })
         .catch((err) =>{
             res.send(err);
         });
 
-});
-
-// ============== Comment Editing ==============
-
-router.get("/commEdit", isAuth, function(req, res){
-    res.render("commEdit", {title: "Your Main Source of Fun"});
 });
 
 module.exports = router;

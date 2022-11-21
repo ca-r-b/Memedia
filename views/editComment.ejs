@@ -11,8 +11,8 @@
         <br/>
         <!-- Editor -->
         <div class="edit-comment-form">
-            <form>
-                <textarea id="edit-comment" placeholder="Caption Here!" minlength="3" maxlength="256" rows="7px" cols="90px" required></textarea><br />
+            <form action="/editComment/<%= post._id %>/<%= comment._id %>" method="post">
+                <textarea name="editedComment" id="edit-comment" placeholder="Edit here!" minlength="3" maxlength="256" rows="7px" cols="90px" required><%= comment.content %></textarea><br />
                 <br/>
                 <button id="edit-comment-save" type="submit">Save Comment</button>
             </form>
