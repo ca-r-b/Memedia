@@ -16,25 +16,63 @@ const isAuth = (req, res, next) =>{
 };
 
 // ============== Comment Adding ==============
-router.post("/addComment/:idpost", isAuth, function(req, res){
-    const idpost = req.params.idpost;
+
+router.post("/addComment/:idpost", isAuth, async function(req, res){
+    const postID = req.params.idpost;
     const commentContent = req.body.commentInput;
 
     const comment = new Comment({
-        postID: idpost,
+        postID: postID,
         username: req.session.username,
         date: new Date(),
         content: commentContent
     })
 
-    comment.save()
+    const postHolder = await Post.findById(postID);
+
+    await comment.save()
          .then((result) => {
-            res.redirect("/post/" + idpost);
+            console.log("Comment Saved.");
         })
         .catch((err) =>{
             res.send(err);
         });
+    
+    const commCount = await Comment.count({postID: postID});
+
+    await Post.updateOne(
+        {username: postHolder.username, caption: postHolder.caption}, 
+        {$set: {
+            commentCount: commCount
+        }}
+    )
+
+    res.redirect("/post/" + postID);
 })
+
+// ============== Comment Deleting ==============
+
+router.post("/deleteComment/:idpost/:idcomm", isAuth, async function(req, res){
+    const postID = req.params.idpost;
+    const commID = req.params.idcomm;
+
+    const postHolder = await Post.findById(postID);
+
+    await Comment.deleteOne({_id: commID});
+
+    // Update Post - Comment Count
+    const commCount = await Comment.count({postID: postID});
+
+    await Post.updateOne(
+        {username: postHolder.username, caption: postHolder.caption}, 
+        {$set: {
+            commentCount: commCount
+        }}
+    )
+
+    res.redirect("/post/" + postID);
+})
+
 
 // ============== Comment Reporting ==============
 

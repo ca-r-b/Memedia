@@ -1,4 +1,4 @@
-const srcInput = document.querySelector("#create-post-input-content");
+var srcInput = document.querySelector("#create-post-input-content");
 var srcUploaded = "";
 
 if (srcInput){

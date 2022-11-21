@@ -5,7 +5,7 @@
             <%if(session.isLoggedIn){%>
                 <% if(session.username == comment.username){ %>
                     <!-- To Do: Add Delete and Edit -->
-                    <form action="#" method="post">
+                    <form action="/deleteComment/<%= post._id %>/<%= comment._id %>" method="post">
                         <button id="report-comment"><i class="bi bi-trash-fill"></i> DELETE</button>
                     </form>
                     <form action="#" method="post">

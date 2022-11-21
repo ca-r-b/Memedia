@@ -1,4 +1,4 @@
-const srcInput = document.querySelector("#accSet-img-input");
+var srcInput = document.querySelector("#accSet-img-input");
 var srcUploaded = "";
 
 if (srcInput){

@@ -19,20 +19,25 @@ router.get("/", function(req, res){
         res.redirect("/home");
     }else{
         Post.find().sort({dateCreated: -1})
-        .then((result) =>{
-            res.render("index", {
-                title: "Your Main Source of Fun",
-                posts: result
+            .then((result) =>{
+                res.render("index", {
+                    title: "Your Main Source of Fun",
+                    posts: result
+                });
+            })
+            .catch((err) =>{
+                console.log(err);
             });
-        })
-        .catch((err) =>{
-            console.log(err);
-        });
     }
 });
 
-// To be removed after "Login" is working
-router.get("/home", isAuth, function(req, res){
+router.get("/home", isAuth, async function(req, res){
+    // const posts = await Post.find().sort({dateCreated: -1});
+
+    // if(!posts){
+    //     res.send("Error in Finding Posts!");
+    // }
+
     Post.find().sort({dateCreated: -1})
         .then((result) =>{
             res.render("home", {

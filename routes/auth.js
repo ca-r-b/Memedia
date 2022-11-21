@@ -32,7 +32,6 @@ router.post("/login", async function(req, res){
     }
 
     if(!(password === loggedUser.password)){
-        console.log("logged: " + loggedUser.password)
         return res.redirect("/login"); 
     }
 

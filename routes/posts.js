@@ -38,7 +38,8 @@ router.post("/postUpload", isAuth, async function(req, res){
         caption: capInput,
         img: imgName,
         upvotes: 0,
-        downvotes: 0
+        downvotes: 0,
+        commentCount: 0
     })
 
     post.save()
@@ -57,51 +58,53 @@ router.get("/post/:id", async function(req, res){
 
     const post = await Post.findById(postID);
     const comments = await Comment.find({postID: postID});
-    const vote = await Vote.findOne({username: req.session.username, postID: postID});
 
     if(!post){
-        console.log("Problem: Post");
         res.redirect("/home");
     }
+
     const postUser = await User.findOne({username: post.username});
 
     if(!postUser){
-        console.log("Problem: Poster");
         res.redirect("/home");
     }
 
     if(!comments){
-        console.log("Problem: Comments");
+        console.log("No Comments.");
     }
 
-    if(!vote){
-        const addVote = new Vote({
-            postID: postID,
-            username: req.session.username,
-            vote: 0
-        });
+    if(req.session.isLoggedIn){
+        const vote = await Vote.findOne({username: req.session.username, postID: postID});
 
-        addVote.save()
-            .then((result) => {
-                console.log("Success.");
-            }).catch((err) =>{
-                console.log(err);
+        if(!vote){
+            const addVote = new Vote({
+                postID: postID,
+                username: req.session.username,
+                vote: 0
             });
-    }
-
-    // TO-DO: Add vote to post
-
-    const upvCount = await Vote.count({postID: postID, vote: 1});
-    const dvCount = await Vote.count({postID: postID, vote: -1});
-
-    console.log(upvCount + " " + dvCount)
     
-    await Post.updateOne(
-        {username: post.username, postID: postID}, 
-        {$set: {
-            upvotes: upvCount,
-            downvotes: 0 - dvCount
-        }});
+            addVote.save()
+                .then((result) => {
+                    console.log("Success.");
+                }).catch((err) =>{
+                    console.log(err);
+                });
+        }
+
+        const upvCount = await Vote.count({postID: postID, vote: 1});
+        const dvCount = await Vote.count({postID: postID, vote: -1});
+        const commCount = await Comment.count({postID: postID});
+        
+        console.log(upvCount + " " + dvCount)
+        
+        await Post.updateOne(
+            {username: post.username, caption: post.caption}, 
+            {$set: {
+                upvotes: upvCount,
+                downvotes: dvCount,
+                commentCount: commCount
+            }});
+    }
 
     res.render("postView", {
         title: "Your Main Source of Fun",
@@ -163,13 +166,13 @@ router.post("/vote/:id", async function(req, res){
 
     const upvCount = await Vote.count({postID: postID, vote: 1});
     const dvCount = await Vote.count({postID: postID, vote: -1});
-    const poster = await Post.findById(postID);
+    const postHolder = await Post.findById(postID);
     
     await Post.updateOne(
-        {username: poster.username, postID: postID}, 
+        {username: postHolder.username, caption: postHolder.caption}, 
         {$set: {
             upvotes: upvCount,
-            downvotes: 0 - dvCount
+            downvotes: dvCount
         }});
 
     res.redirect("/post/" + postID);

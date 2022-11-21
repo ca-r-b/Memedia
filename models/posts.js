@@ -6,7 +6,8 @@ const postSchema = new mongoose.Schema({
     caption: {type: String, min: 3, max: 100, required: true},
     img: {type: String, required: true},
     upvotes: {type: Number, required: true},
-    downvotes: {type: Number, required: true}
+    downvotes: {type: Number, required: true},
+    commentCount: {type: Number, required: true}
 });
 
 const Post = mongoose.model('Post', postSchema);

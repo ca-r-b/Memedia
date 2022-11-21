@@ -26,18 +26,11 @@
                         <i id="post-dv" class="bi bi-caret-down"></i>
                         <p>DOWNVOTE</p>
                     </button>
-                
+                    <button id="view-post-remove-vote" name="voteBtn" value="0" type="submit">Remove Vote</button>
             </form>
         <% } %>
 
-        <p id="view-post-count">VOTE COUNT: <%= post.upvotes + post.downvotes %></p>
-
-        <!-- Remove vote -->
-        <% if(session.isLoggedIn){ %>
-            <form id="post-vote-form">
-                <button id="view-post-remove-vote" name="removeVote" type="submit">Remove Vote</button>
-            </form>
-        <% } %>
+        <p id="view-post-count">VOTE COUNT: <%= post.upvotes - post.downvotes %></p>
 
         <div class="view-post-stats-others">
             <% if(session.isLoggedIn){ %>
