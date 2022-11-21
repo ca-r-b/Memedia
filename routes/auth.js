@@ -16,7 +16,7 @@ const isAuth = (req, res, next) =>{
     }
 };
 
-// TO-DO - DATABASE NEEDED: Add .post of routes
+// Login
 
 router.get("/login", function(req, res){
     res.render("login", {title: "Login"});

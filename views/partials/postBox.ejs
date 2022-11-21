@@ -10,19 +10,7 @@
     </div>
     <div class="post-footer">
         <div class="post-info">
-            
-            <!-- TO-DO - DATABASE + JS NEED: Add functionality 
-                1. User can only vote for 1 (e.g. Kung nag-Upvote siya then pinagchange to Downvote, mawawala Upvote niya)
-                2. Update vote count database
-                3. Make sure button is updated
-                4. Add action to <form> [REMOVE <form> tag if you think it is NOT necessary]
-            -->
-            <p id="post-count"><i id="post-count-icon" class="bi bi-arrow-down-up"></i> Votes: <%= post.upvotes - post.downvotes %></p>
-            
-
-            <!-- TO-DO - DATABASE NEED: if OWNED by User, put DELETE BUTTON -->
-            <!-- Report Button == Redirect to Reporting Page -->
-
+            <p id="post-count"><i id="post-count-icon" class="bi bi-arrow-down-up"></i> Votes: <%= post.upvotes + post.downvotes %></p>
             <p class="post-date"><i class="bi bi-clock"></i> Posted on: <%= post.dateCreated.toDateString() %></p>
             <hr class="post-divider">
         </div>

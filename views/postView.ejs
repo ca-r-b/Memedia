@@ -30,7 +30,7 @@
             </form>
         <% } %>
 
-        <p id="view-post-count">VOTE COUNT: <%= post.upvotes - post.downvotes %></p>
+        <p id="view-post-count">VOTE COUNT: <%= post.upvotes + post.downvotes %></p>
 
         <!-- Remove vote -->
         <% if(session.isLoggedIn){ %>
