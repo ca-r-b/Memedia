@@ -18,18 +18,28 @@
     <div class="view-post-stats">
         <% if(session.isLoggedIn){ %>
             <form action="/vote/<%= post._id%>" method="post" id="post-vote-form">
-                    <button name="voteBtn" value="1" id="upVote" type="submit">
-                        <i id="post-upv" class="bi bi-caret-up"></i>
-                        <p>UPVOTE</p>
-                    </button>
-                    <button name="voteBtn" value="-1" id="downVote" type="submit">
-                        <i id="post-dv" class="bi bi-caret-down"></i>
-                        <p>DOWNVOTE</p>
-                    </button>
-                    <button id="view-post-remove-vote" name="voteBtn" value="0" type="submit">Remove Vote</button>
+                <button name="voteBtn" value="1" id="upVote" type="submit">
+                    <i id="post-upv" class="bi bi-caret-up"></i>
+                    <p>UPVOTE</p>
+                </button>
+                <button name="voteBtn" value="-1" id="downVote" type="submit">
+                    <i id="post-dv" class="bi bi-caret-down"></i>
+                    <p>DOWNVOTE</p>
+                </button>
+                <button id="view-post-remove-vote" name="voteBtn" value="0" type="submit">Remove Vote</button>
             </form>
+
+            <p id="view-post-count">YOU HAVE: 
+                <% if(vote.vote === 1){ %>
+                    <b style="color: yellowgreen;">UPVOTED</b></p>
+                <% } else if (vote.vote === -1) {%>
+                    <b style="color: red;">DOWNVOTED</b></p>
+                <% } else if (vote.vote === 0) {%>
+                    <b style="color: #FFFF9F;">NOT VOTED YET</b></p>
+                <% } %>
         <% } %>
 
+        &nbsp;
         <p id="view-post-count">VOTE COUNT: <%= post.upvotes - post.downvotes %></p>
 
         <div class="view-post-stats-others">

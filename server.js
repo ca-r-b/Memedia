@@ -51,10 +51,9 @@ app.use(session({
     saveUninitialized: false,
     store: store,
     isLoggedIn: false
-    // cookie: { maxAge: 60000}
 }));
 
-// Store session variables
+// Store LOCAL session variables
 app.use((req, res, next) => {
     res.locals.session = req.session;
     next();

@@ -44,7 +44,7 @@ router.post("/postUpload", isAuth, async function(req, res){
 
     post.save()
         .then((result) => {
-            res.redirect("/postCreate");
+            res.redirect("/");
         })
         .catch((err) =>{
             res.send(err);
@@ -55,7 +55,6 @@ router.post("/postUpload", isAuth, async function(req, res){
 
 router.get("/post/:id", async function(req, res){
     const postID = req.params.id;
-
     const post = await Post.findById(postID);
     const comments = await Comment.find({postID: postID});
 
@@ -74,28 +73,21 @@ router.get("/post/:id", async function(req, res){
     }
 
     if(req.session.isLoggedIn){
-        const vote = await Vote.findOne({username: req.session.username, postID: postID});
+        const searchVote = await Vote.findOne({username: req.session.username, postID: postID});
 
-        if(!vote){
+        if(!searchVote){
             const addVote = new Vote({
                 postID: postID,
                 username: req.session.username,
                 vote: 0
             });
-    
-            addVote.save()
-                .then((result) => {
-                    console.log("Success.");
-                }).catch((err) =>{
-                    console.log(err);
-                });
+
+            addVote.save();
         }
 
         const upvCount = await Vote.count({postID: postID, vote: 1});
         const dvCount = await Vote.count({postID: postID, vote: -1});
         const commCount = await Comment.count({postID: postID});
-        
-        console.log(upvCount + " " + dvCount)
         
         await Post.updateOne(
             {username: post.username, caption: post.caption}, 
@@ -103,16 +95,25 @@ router.get("/post/:id", async function(req, res){
                 upvotes: upvCount,
                 downvotes: dvCount,
                 commentCount: commCount
-            }});
+            }})
+        
+        const voteOfUser = await Vote.findOne({username: req.session.username, postID: postID});
+
+        res.render("postView", {
+            title: "Your Main Source of Fun",
+            user: postUser,
+            post: post,
+            comments: comments,
+            vote: voteOfUser
+        })
     }
 
-    res.render("postView", {
+    return res.render("postView", {
         title: "Your Main Source of Fun",
         user: postUser,
         post: post,
-        comments: comments
+        comments: comments,
     })
-
 });
 
 
@@ -120,7 +121,6 @@ router.get("/post/:id", async function(req, res){
 
 router.post("/postReport/:id", isAuth, async function(req, res){
     const postID = req.params.id;
-    console.log(postID)
 
     await Post.findById(postID)
         .then((results) => {
@@ -142,7 +142,8 @@ router.post("/confirmPostReport/:id", isAuth, async function(req, res){
     const report = new RepPost({
         postID: req.params.id,
         reporterUser: req.session.username, 
-        remarks: repType
+        remarks: repType,
+        dateReported: new Date()
     });
 
     await report.save()
@@ -183,7 +184,7 @@ router.post("/vote/:id", async function(req, res){
 router.get("/search", async function(req, res){
     const searchInput = req.query.searchInput;
 
-    await Post.find({caption: {$regex: new RegExp(searchInput)}}).then((results)=>{
+    await Post.find({caption: {$regex: new RegExp(searchInput, 'i')}}).then((results)=>{
         res.render("search", {
             title: "Search Results",
             posts: results

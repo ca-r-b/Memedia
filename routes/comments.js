@@ -112,7 +112,8 @@ router.post("/confirmCommReport/:idpost/:idcomm", isAuth, function(req, res){
         // TO-DO: Replace "reporterUser with Logged-In User"
         reporterUser: "pop", 
         remarks: repType,
-        commentID: commentID
+        commentID: commentID,
+        dateReported: new Date()
     });
 
     report.save()

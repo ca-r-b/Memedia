@@ -13,14 +13,43 @@ const isAuth = (req, res, next) =>{
     }
 };
 
-// TO-DO - DATABASE NEEDED: Add .post of routes
+router.get("/register", function(req, res){
+    res.render("register", {title: "Register Now"});
+});
+
+router.post("/register", async function(req, res){
+    const username = await req.body.username;
+    const password = await req.body.password;
+    const email = await req.body.email;
+
+    // validate = findOne
+    const findUser = await User.findOne({username: username});
+
+    if(!findUser){
+        const user = new User({
+            username: username,
+            password: password,
+            email: email,
+            bio: "Hello!",
+            img: "default.png",
+        })
+
+        await user.save();
+    }else{
+        // TO-DO: Display that user exists
+        console.log("User already exists.");
+        return res.redirect("/register");
+    }
+
+    res.redirect("/login");
+})
 
 router.get("/user/:profileName", function(req, res){
     const profileName = req.params.profileName;
 
     User.findOne({username: profileName})
         .then((userRes) =>{
-            Post.find({username: profileName})
+            Post.find({username: profileName}).sort({dateCreated: -1})
                 .then((postRes) =>{
                     res.render("userView", {
                         title: "Your Main Source of Fun",

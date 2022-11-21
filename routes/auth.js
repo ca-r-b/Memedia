@@ -17,9 +17,12 @@ const isAuth = (req, res, next) =>{
 };
 
 // Login
-
 router.get("/login", function(req, res){
-    res.render("login", {title: "Login"});
+    if(!req.session.isLoggedIn){
+        res.render("login", {title: "Login"});
+    }else{
+        res.redirect("/home");
+    }
 });
 
 router.post("/login", async function(req, res){
@@ -42,10 +45,6 @@ router.post("/login", async function(req, res){
     req.session.img = loggedUser.img;
     res.redirect("/home");
 })
-
-router.get("/register", function(req, res){
-    res.render("register", {title: "Register Now"});
-});
 
 router.get("/logout", function(req, res){
     req.session.destroy((err) => {

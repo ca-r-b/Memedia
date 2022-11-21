@@ -11,14 +11,7 @@
         </div>
         <!-- Sign In Fields -->
         <div class="register-form">
-            <!-- To-Do
-                1. Put Action to <form>
-                2. Put Method to <form>
-                3. Username Validation [must be Unique]
-                4. Email Validation [must be Unique]
-                5. Must be ADDED to database
-            -->
-            <form>
+            <form action="/register" method="post">
                 <!-- User Input -->
                 <label>Username</label><br/>
                 <input name="username" type="text" minlength="5" maxlength="15"  placeholder="*e.g. ragnar0ck" required><br/>
@@ -37,6 +30,7 @@
         </div>
         <!-- Registration Redirection -->
         <div class="register-rdr">
+            <p style="color: rgb(221, 221, 221)"><i>NOTE: You will have to go to your profile settings after registering and logging in to update your profile picture and biography.</i></p>
             <br/>
             <p>Already have an account yet? <a href="/login">Sign in here!</a></p>
         </div>
