@@ -1,4 +1,7 @@
 <div class="view-post-container">
+    <% if(msg !== ""){ %>
+        <h4 class="msg-success"><%= msg %></h4><br/>
+    <% } %>
     <div class="view-post-user">
         <div class="view-post-user-prof">
             <img src="/images/pfps/<%= user.img %>">
@@ -6,7 +9,7 @@
         <div class="view-post-user-name">
             <a href="/user/<%= post.username %>"><%= post.username %></a>
             <hr/>
-            <p>Posted on: <%= post.dateCreated.toDateString() %></p>
+            <p>Posted on: <%= post.dateCreated.toDateString() %>, <%= post.dateCreated.toLocaleTimeString() %></p>
         </div>
     </div>
     <hr>
@@ -58,7 +61,6 @@
     </div>
     <br />
     <div class="view-post-content">
-        <!-- TO-DO - DATABASE NEED: Replace with ACTUAL User Post Image -->
         <img class="post-content" src="/images/posts/<%= post.img %>">
     </div>
     <br>
@@ -71,7 +73,6 @@
         </div>
         <div class="view-post-comment-add">
             <% if(session.isLoggedIn){ %>
-                <!-- TO-DO - Add action -->
                 <form action="/addComment/<%= post._id %>" method="post">
                     <div class="input-group mb-3">
                         <input name="commentInput" type="text" minlength="3" maxlength="256" class="form-control" placeholder="Comment Here..." aria-label="Recipient's username" aria-describedby="button-addon2" required/>

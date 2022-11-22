@@ -12,7 +12,7 @@ const isAuth = (req, res, next) =>{
     }
 };
 
-// TO-DO - DATABASE NEEDED: Add .post of routes
+// ============== Landing Page ==============
 
 router.get("/", function(req, res){
     if(req.session.isAuth){
@@ -32,23 +32,17 @@ router.get("/", function(req, res){
 });
 
 router.get("/home", isAuth, async function(req, res){
-    // const posts = await Post.find().sort({dateCreated: -1});
-
-    // if(!posts){
-    //     res.send("Error in Finding Posts!");
-    // }
-
     Post.find().sort({dateCreated: -1})
         .then((result) =>{
             res.render("home", {
                 title: "Your Main Source of Fun",
-                posts: result
+                posts: result,
+                msg: ""
             });
         })
         .catch((err) =>{
             console.log(err);
         });
-    
 });
 
 router.get("/aboutUs", function(req, res){

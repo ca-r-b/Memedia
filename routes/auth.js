@@ -7,10 +7,11 @@ const RepComment = require("../models/reportComments");
 const RepPost = require("../models/reportPosts");
 const Vote = require("../models/votes");
 
-// Login
+// ============== Login ==============
+
 router.get("/login", function(req, res){
     if(!req.session.isLoggedIn){
-        res.render("login", {title: "Login"});
+        res.render("login", {title: "Login", msg: ""});
     }else{
         res.redirect("/home");
     }
@@ -22,11 +23,11 @@ router.post("/login", async function(req, res){
     const loggedUser = await User.findOne({username: username});
 
     if(!loggedUser){
-        return res.redirect("/login");
+        return res.render("login", {title: "Login", msg: "Invalid credentials! Please try again"});
     }
 
     if(!(password === loggedUser.password)){
-        return res.redirect("/login"); 
+        return res.render("login", {title: "Login", msg: "Invalid credentials! Please try again"});
     }
 
     // Assign session variables

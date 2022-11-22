@@ -3,9 +3,7 @@ const mongoose = require("mongoose");
 const votesSchema = new mongoose.Schema({
     postID:{type: String, required: true},
     username: {type: String, required: true},
-    vote: {type: Number, required: true},
-        // If vote === -1 -> Downvote
-        // If vote === 1 -> Upvote 
+    vote: {type: Number, required: true}
 });
 
 const Vote = mongoose.model('Votes', votesSchema);

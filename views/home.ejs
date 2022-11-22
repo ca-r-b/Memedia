@@ -1,14 +1,11 @@
 <div class="home-h1-containter">
-    <a href="home"><h1 class="home-h1">WHAT'S POPPIN'?</h1></a>
+    <a href="home"><h1 class="home-h1">YOUR MEME FEED</h1></a>
 </div>
 
 <div class = "post-container">
-    <!-- 
-        TO-DO:
-        1. Add For-Loop [Iterate through database / Show all posts]
-        2. User redirection [Logged in]
-     -->
-
+    <% if(msg !== ""){ %>
+        <h4 class="msg-success"><%= msg %></h4><br/>
+    <% } %>
     <% if (posts.length > 0) {%> 
         <% posts.forEach(post => { %> 
             <%- include("./partials/postBox.ejs", {post: post}) %>

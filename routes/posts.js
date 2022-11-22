@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require('path');
+const fs = require("fs");
 const User = require("../models/users");
 const Post = require("../models/posts");
 const Comment = require("../models/comments")
@@ -19,8 +20,12 @@ const isAuth = (req, res, next) =>{
 
 // ============== Post Uploading ==============
 
-router.get("/postCreate", isAuth, function(req, res){
-    res.render("postCreate", {title: "Post Your Meme"});
+router.get("/postCreate", function(req, res){
+    if(req.session.isLoggedIn){
+        return res.render("postCreate", {title: "Post Your Meme"});
+    }else{
+        return res.render("login",  { title: "Login", msg: "Login first to access the post upload feature!" });
+    }
 });
 
 router.post("/postUpload", isAuth, async function(req, res){
@@ -42,21 +47,52 @@ router.post("/postUpload", isAuth, async function(req, res){
         commentCount: 0
     })
 
-    post.save()
-        .then((result) => {
-            res.redirect("/");
-        })
-        .catch((err) =>{
-            res.send(err);
-        });
+    await post.save();
+
+    const postsRes = await Post.find().sort({dateCreated: -1});
+
+    res.render("home", {
+        title: "Your Main Source of Fun",
+        posts: postsRes,
+        msg: "Your post has been sucessfully uploaded!"
+    });
 });
+
+// ============== Post Deleting ==============
+
+router.post("/postDelete/:id", async function(req, res){
+    const postID = req.params.id;
+    const postHolder = await Post.findById(postID);
+
+    // Remove post image from file directory
+    const postImg = path.resolve(__dirname + '/..', 'public/images/posts', postHolder.img);
+    fs.unlink(postImg, (err)=>{
+        if(err){
+            console.log(err);
+        }
+    })
+
+    await Post.deleteOne({_id: postID});
+    await Vote.deleteMany({postID: postID});
+    await RepComment.deleteMany({postID: postID});
+    await RepPost.deleteMany({postID: postID});
+    await Comment.deleteMany({postID: postID});
+
+    const postsRes = await Post.find().sort({dateCreated: -1});
+
+    res.render("home", {
+        title: "Your Main Source of Fun",
+        posts: postsRes,
+        msg: "Your post has been deleted!"
+    });
+})
 
 // ============== Post Viewing ==============
 
 router.get("/post/:id", async function(req, res){
     const postID = req.params.id;
     const post = await Post.findById(postID);
-    const comments = await Comment.find({postID: postID});
+    const comments = await Comment.find({postID: postID}).sort({date: -1});
 
     if(!post){
         res.redirect("/home");
@@ -104,7 +140,8 @@ router.get("/post/:id", async function(req, res){
             user: postUser,
             post: post,
             comments: comments,
-            vote: voteOfUser
+            vote: voteOfUser,
+            msg: ""
         })
     }
 
@@ -113,9 +150,9 @@ router.get("/post/:id", async function(req, res){
         user: postUser,
         post: post,
         comments: comments,
+        msg: ""
     })
 });
-
 
 // ============== Post Reporting ==============
 
@@ -126,7 +163,7 @@ router.post("/postReport/:id", isAuth, async function(req, res){
         .then((results) => {
             res.render("reportPost", {
                 title: "Report Post",
-                post: results
+                post: results,
             });
         })
         .catch((err) =>{
@@ -135,9 +172,8 @@ router.post("/postReport/:id", isAuth, async function(req, res){
 });
 
 router.post("/confirmPostReport/:id", isAuth, async function(req, res){
-    var repType = req.body.reportType;
-
-    console.log(repType);
+    const postID = req.params.id;
+    const repType = req.body.reportType;
 
     const report = new RepPost({
         postID: req.params.id,
@@ -146,22 +182,37 @@ router.post("/confirmPostReport/:id", isAuth, async function(req, res){
         dateReported: new Date()
     });
 
-    await report.save()
-        .then((result) => {
-            res.redirect("/post/" + req.params.id);
-        })
-        .catch((err) =>{
-            res.send(err);
-        });
+    await report.save();
+
+    const postHolder = await Post.findById(postID);
+    const postUser = await User.findOne({username: postHolder.username});
+    const comments = await Comment.find({postID: postID}).sort({date: -1});
+    const voteOfUser = await Vote.findOne({username: req.session.username, postID: postID});
+
+    res.render("postView", {
+        title: "Your Main Source of Fun",
+        user: postUser,
+        post: postHolder,
+        comments: comments,
+        vote: voteOfUser,
+        msg: "Post reported! We will be reviewing it as soon as possible!"
+    });
+
+        // .then(() => {
+        //     res.redirect("/post/" + req.params.id);
+        // })
+        // .catch((err) =>{
+        //     res.send(err);
+        // });
 
 });
 
 // ============== Post Voting ==============
 
 router.post("/vote/:id", async function(req, res){
-    var postID = req.params.id;
-    var voter = req.session.username;
-    var action = req.body.voteBtn;
+    const postID = req.params.id;
+    const voter = req.session.username;
+    const action = req.body.voteBtn;
 
     await Vote.updateOne({username: voter, postID: postID}, {$set: {vote: action}});
 
@@ -193,5 +244,19 @@ router.get("/search", async function(req, res){
         console.log(err);
     })
 })
+
+// ============== Post Creating/Deleting - Redirection pages: After reentering same URL (Removes msg content) ==============
+
+router.get([
+    "/postUpload", 
+    "/postDelete/:id"
+], isAuth, function(req, res){
+    res.redirect("/home");
+});
+
+router.get("/confirmPostReport/:id", isAuth, function(req, res){
+    res.redirect("/post/" + req.params.id);
+});
+
 
 module.exports = router;

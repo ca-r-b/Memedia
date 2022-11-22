@@ -22,6 +22,6 @@
         <p><%= comment.content %></p>
     </div>
     <div class="view-post-comment-date">
-        <i class="bi bi-clock"></i> Commented on: <%= comment.date.toDateString() %>
+        <i class="bi bi-clock"></i> Commented on: <%= comment.date.toDateString() %>, <%= comment.date.toLocaleTimeString() %>
     </div>
 </div>

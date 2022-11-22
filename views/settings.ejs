@@ -15,6 +15,9 @@
 
 <!-- Forms -->
 <div class="accSet-form-container">
+    <% if(msg !== ""){ %>
+        <h4 class="msg-success"><%= msg %></h4>
+    <% } %>
     <!-- Section 1 Container -->
     <div class="accSet-box">
         <div class="accSet-header">
@@ -24,10 +27,6 @@
             </p>
         </div>
         <div class="accSet-field">
-            <!-- TO-DO - DATABASE NEEDED:
-                1. Add ACTION and METHOD to <form>
-                2. Update database after clicking "Save Changes"         
-            -->
             <form action="/settings/updateEmail/<%= user.username %>" method="post">
                 <label><b>E-MAIL ADDRESS</b></label><br />
                 <input type="email" name="updEmail" placeholder="Update E-Mail Address. . ." value="<%= user.email %>" required>
@@ -46,10 +45,6 @@
             </p>
         </div>
         <div class="accSet-field">
-            <!-- TO-DO - DATABASE NEEDED:
-                1. Add ACTION and METHOD to <form>
-                2. Update database after clicking "Save Changes"         
-            -->
             <form action="/settings/updatePass/<%= user.username %>" method="post">
                 <label><b>PASSWORD</b></label><br />
                 <input type="password" name="updPass" placeholder="Update Password. . ." value="<%= user.password %>" minlength="8" maxlength="16" required>
@@ -67,10 +62,6 @@
             </p>
         </div>
         <div class="accSet-field">
-            <!-- TO-DO - DATABASE NEEDED:
-                1. Add ACTION and METHOD to <form>
-                2. Update database after clicking "Save Changes"         
-            -->
             <form action="/settings/updatePfp/<%= user.username %>" method="post" enctype="multipart/form-data">
                 <label><b>PROFILE PICTURE</b></label><br />
                 <div id="accSet-img"></div>
@@ -89,10 +80,6 @@
             </p>
         </div>
         <div class="accSet-field">
-            <!-- TO-DO - DATABASE NEEDED:
-                1. Add ACTION and METHOD to <form>
-                2. Update database after clicking "Save Changes"         
-            -->
             <form action="/settings/updateBio/<%= user.username %>" method="post">
                 <label><b>BIOGRAPHY</b></label><br />
                 <textarea class="accSet-input3" name="updBio" rows="7px" cols="50px"  minlength="3" maxlength="200" required><%= user.bio %></textarea><br /><br />

@@ -4,6 +4,13 @@ body{
     font-family: 'Oswald', sans-serif !important;
 }
 
+.msg-success{
+    font-family: 'Concert One', cursive;
+    text-align: center; 
+    color: rgb(17, 255, 0);
+    margin-bottom: 20px;
+}
+
 /* =============== NAVIGATION BAR =============== */
 
 /* Nav Bar - Base */
@@ -230,7 +237,7 @@ body{
 .login-title{
     /* background-color: rgb(16, 126, 222); */
     font-family: 'Concert One', cursive;
-    margin-top: 100px;
+    margin-top: 60px;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -280,8 +287,12 @@ body{
     width: 495px;
 }
 
+.login-title h4{
+    margin-bottom: -20px;
+}
+
 .login-form{
-    margin-top: 60px;
+    margin-top: 50px;
     text-align: center;
 }
 
@@ -646,7 +657,7 @@ body{
     margin-top: 120px;
     margin-right: auto;
     margin-left: auto;
-    width: 550px;
+    width: 590px;
     transition: all 0.1s;
     box-shadow: 0px 3px 10px #00000089;
 }
@@ -768,7 +779,9 @@ body{
 }
 
 .post-info{
-    margin-top: 6px;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    margin-top: 13px;
 }
 
 .post-info p{
@@ -870,8 +883,8 @@ body{
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     float: right;
-    height: 100px;
-    width: 200px;
+    min-height: 100px;
+    min-width: 200px;
     padding: 15px;
 }
 
@@ -1089,13 +1102,15 @@ body{
 
 .profile-bio{
     background-color: #9A8C98;
-    color: #22223B;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    color: #22223B;
+    font-family: "Concert One", cursive;
     min-height: 150px;
     margin-top: -100px;
     margin-right: auto;
     margin-left: auto;
+    padding-right: 10px;
 }
 
 .profile-bio h2{

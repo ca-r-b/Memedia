@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require("fs");
 const router = express.Router();
 const path = require('path');
 const Post = require("../models/posts");
@@ -22,7 +23,6 @@ router.post("/register", async function(req, res){
     const password = await req.body.password;
     const email = await req.body.email;
 
-    // validate = findOne
     const findUser = await User.findOne({username: username});
 
     if(!findUser){
@@ -66,7 +66,7 @@ router.get("/user/:profileName", function(req, res){
         });
 });
 
-// Settings
+// ============== Visit Settings ==============
 
 router.get("/settings/:profileName", isAuth, function(req, res){
     const profileName = req.params.profileName;
@@ -76,7 +76,8 @@ router.get("/settings/:profileName", isAuth, function(req, res){
         .then((userRes) =>{
             res.render("settings", {
                 title: "Account Settings",
-                user: userRes
+                user: userRes,
+                msg: ""
             });
         })
         .catch((err) =>{
@@ -88,43 +89,76 @@ router.get("/settings/:profileName", isAuth, function(req, res){
 
 });
 
-// Settings Update - Email
+// ============== Settings Update - Email ==============
+
 router.post("/settings/updateEmail/:profileName", isAuth, async function(req, res){
     const profileName = req.params.profileName;
     var emailInput = req.body.updEmail;
 
     await User.updateOne({username: profileName},{$set: {email: emailInput}});
 
-    res.redirect("/settings/" + profileName);
+    const profileHolder = await User.findOne({username: profileName});
+
+    res.render("settings", {
+        title: "Account Settings",
+        user: profileHolder,
+        msg: "New email saved."
+    });
 });
 
-// Settings Update - Password
+// ============== Settings Update - Password ==============
+
 router.post("/settings/updatePass/:profileName", isAuth, async function(req, res){
     const profileName = req.params.profileName;
     var passInput = req.body.updPass;
 
     await User.updateOne({username: profileName},{$set: {password: passInput}});
 
-    res.redirect("/settings/" + profileName);
+    const profileHolder = await User.findOne({username: profileName});
+
+    res.render("settings", {
+        title: "Account Settings",
+        user: profileHolder,
+        msg: "New password saved."
+    });
 });
 
-// Settings Update - Profile Picture
+// ============== Settings Update - Profile Picture ==============
+
 router.post("/settings/updatePfp/:profileName", isAuth, async function(req, res){
     const profileName = req.params.profileName;
     var img = req.files.updPfp;
     var imgName = req.session.username + "-" + Date.now() + "-" + img.name;
 
+    // Remove current image from file directory
+    if(!(req.session.img === "default.png")){
+        const oldPfp = path.resolve(__dirname + '/..', 'public/images/pfps', req.session.img);
+        fs.unlink(oldPfp, (err)=>{
+            if(err){
+                console.log(err);
+            }
+        })
+    }
+
     // Redirect to upload folder
     await img.mv(path.resolve(__dirname + '/..', 'public/images/pfps', imgName));
-    await User.updateOne({username: profileName},{$set: {img: imgName}});
 
+    // Set variables
+    await User.updateOne({username: profileName},{$set: {img: imgName}});
     req.session.img = imgName;
 
-    res.redirect("/settings/" + profileName);
+    const profileHolder = await User.findOne({username: profileName});
+
+    res.render("settings", {
+        title: "Account Settings",
+        user: profileHolder,
+        msg: "New profile picture saved."
+    });
 });
 
 
-// Settings Update - Biography
+// ============== Settings Update - Biography ==============
+
 router.post("/settings/updateBio/:profileName", isAuth, async function(req, res){
     const profileName = req.params.profileName;
     var bioInput = req.body.updBio.toString();
@@ -133,7 +167,24 @@ router.post("/settings/updateBio/:profileName", isAuth, async function(req, res)
 
     await User.updateOne({username: profileName},{$set: {bio: bioInput}});
 
-    res.redirect("/settings/" + profileName);
+    const profileHolder = await User.findOne({username: profileName});
+
+    res.render("settings", {
+        title: "Account Settings",
+        user: profileHolder,
+        msg: "New profile biography saved."
+    });
+});
+
+// ============== Settings - Redirection pages: After reentering same URL (Removes msg content) ==============
+
+router.get([
+        "/settings/updateEmail/:profileName", 
+        "/settings/updatePfp/:profileName",
+        "/settings/updatePass/:profileName",
+        "/settings/updateBio/:profileName",
+    ], isAuth, function(req, res){
+        res.redirect("/settings/" + req.params.profileName);
 });
 
 

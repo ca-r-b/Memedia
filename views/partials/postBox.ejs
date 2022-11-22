@@ -13,7 +13,7 @@
             <p id="post-count"><i id="post-count-icon" class="bi bi-arrow-down-up"></i> ∙ Votes: <%= post.upvotes - post.downvotes %></p>
             &nbsp;&nbsp;
             <p id="post-count"><i class="bi bi-chat-right-dots-fill"></i> ∙ Comments: <%= post.commentCount %></p>
-            <p class="post-date"><i class="bi bi-clock"></i> Posted on: <%= post.dateCreated.toDateString() %></p>
+            <p class="post-date"><i class="bi bi-clock"></i> <%= post.dateCreated.toDateString() %>, <%= post.dateCreated.toLocaleTimeString() %></p>
             <hr class="post-divider">
         </div>
     </div>

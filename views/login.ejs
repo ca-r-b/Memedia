@@ -8,17 +8,13 @@
         <div class="login-title">
             <h1>Log In</h1>
             <hr/>
+            <% if(msg !== ""){ %>
+                <h4 style="color: rgb(177, 0, 0)"><%= msg %></h4>
+            <% } %>
         </div>
-        <!-- Sign In Fields -->
-        <!-- TO-DO - DATABASE NEEDED:
-            1. Add action to <form>
-            2. Check if username and password are valid
-        -->
+        
         <div class="login-form">
-            <!-- TO-DO - DATABASE NEEDED: 
-                1. Replace METHOD from "get" to "post" AFTER ADDING MongoDB 
-            -->
-            <form action="/login" method="post">
+                <form action="/login" method="post">
                 <!-- Login Input -->
                 <label for="login-username">Username</label><br/>
                 <input name="username" id="login-username" type="text" placeholder="Username" required><br/>

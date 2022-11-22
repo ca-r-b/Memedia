@@ -4,7 +4,7 @@ const User = require("../models/users");
 const Post = require("../models/posts");
 const Comment = require("../models/comments")
 const RepComment = require("../models/reportComments");
-const RepPost = require("../models/reportPosts");
+const Vote = require("../models/votes");
 
 // Session Checking - Check if authenticated
 const isAuth = (req, res, next) =>{
@@ -30,13 +30,7 @@ router.post("/addComment/:idpost", isAuth, async function(req, res){
 
     const postHolder = await Post.findById(postID);
 
-    await comment.save()
-         .then((result) => {
-            console.log("Comment Saved.");
-        })
-        .catch((err) =>{
-            res.send(err);
-        });
+    await comment.save();
     
     const commCount = await Comment.count({postID: postID});
 
@@ -105,7 +99,6 @@ router.post("/deleteComment/:idpost/:idcomm", isAuth, async function(req, res){
 router.get("/commReport/:idpost/:idcomm", isAuth, async function(req, res){
     const postID = req.params.idpost;
     const commentID = req.params.idcomm;
-    console.log(postID)
 
     await Post.findById(postID)
         .then((postRes) =>{
@@ -127,28 +120,41 @@ router.get("/commReport/:idpost/:idcomm", isAuth, async function(req, res){
     
 });
 
-router.post("/commReport/:idpost/:idcomm", isAuth, function(req, res){ 
-    var commentID = req.params.idcomm;
-    var postID = req.params.idpost;
-    var repType = req.body.reportType;
-
-    console.log(repType);
+router.post("/confirmCommReport/:idpost/:idcomm", isAuth, async function(req, res){ 
+    const commentID = req.params.idcomm;
+    const postID = req.params.idpost;
+    const repType = req.body.reportType;
 
     const report = new RepComment({
         reporterUser: req.session.username, 
         remarks: repType,
+        postID: postID,
         commentID: commentID,
         dateReported: new Date()
     });
 
-    report.save()
-        .then(() => {
-            res.redirect("/post/" + postID);
-        })
-        .catch((err) =>{
-            res.send(err);
-        });
+    await report.save();
 
+    const postHolder = await Post.findById(postID);
+    const postUser = await User.findOne({username: postHolder.username});
+    const comments = await Comment.find({postID: postID}).sort({date: -1});
+    const voteOfUser = await Vote.findOne({username: req.session.username, postID: postID});
+
+    res.render("postView", {
+        title: "Your Main Source of Fun",
+        user: postUser,
+        post: postHolder,
+        comments: comments,
+        vote: voteOfUser,
+        msg: "Comment reported! We will be reviewing it as soon as possible!"
+    });
 });
+
+// ============== Post Creating/Deleting - Redirection pages: After reentering same URL (Removes msg content) ==============
+
+router.get("/confirmCommReport/:idpost/:idcomm", isAuth, function(req, res){
+    res.redirect("/post/" + req.params.idpost);
+});
+
 
 module.exports = router;
