@@ -1,6 +1,7 @@
 const Post = require("../models/posts");
 
 const indexController = {
+    // ============================ Default landing page ============================
     getLandingPage: (req, res) => {
         if(req.session.isAuth){
             res.redirect("/home");
@@ -18,6 +19,7 @@ const indexController = {
         }
     },
 
+    // ============================ Home screen - After authentication / Logging In ============================
     getHome: async (req, res) => {
         Post.find().sort({dateCreated: -1})
         .then((result) =>{

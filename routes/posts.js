@@ -3,6 +3,7 @@ const router = express.Router();
 
 const postController = require("../controllers/postsController");
 const repPostController = require("../controllers/repPostsController");
+const votesController = require("../controllers/votesController");
 
 // Session Checking - Check if authenticated
 const isAuth = (req, res, next) =>{
@@ -13,29 +14,29 @@ const isAuth = (req, res, next) =>{
     }
 };
 
-// Post Uploading
+// Post Uploading routes
 router.get("/postCreate", postController.getCreatePost);
 router.post("/postUpload", isAuth, postController.postUpload);
 
-// Post Deleting
+// Post Deleting route
 router.post("/postDelete/:id", postController.postDelete);
 
-// Post Viewing
+// Post Viewing route
 router.get("/post/:id", postController.getPostView);
 
-// Post Reporting
+// Post Reporting routes
 router.post("/postReport/:id", isAuth, repPostController.postReport);
 router.post("/confirmPostReport/:id", isAuth, repPostController.postConfirmReport);
 
-// Post Voting
-router.post("/vote/:id", postController.postVote);
+// Post Voting route
+router.post("/vote/:id", votesController.postVote);
 
-// Post Searching
+// Post Searching route
 router.get("/search", postController.postSearch);
 
 // Redirection routes
-router.get(["/postUpload", "/postDelete/:id"], isAuth, postController.getDefault1);
-router.get("/confirmPostReport/:id", isAuth, postController.getDefault2);
+router.get(["/postUpload", "/postDelete/:id"], isAuth, postController.getPostDefault);
+router.get("/confirmPostReport/:id", isAuth, repPostController.getPostDefault);
 
 
 module.exports = router;

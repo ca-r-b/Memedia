@@ -1,15 +1,11 @@
 const User = require("../models/users");
 const Post = require("../models/posts");
 const Comment = require("../models/comments")
-const RepComment = require("../models/reportComments");
 const RepPost = require("../models/reportPosts");
 const Vote = require("../models/votes");
 
-const bcrypt = require("bcryptjs");
-const fs = require("fs");
-const path = require('path');
-
 const repPostsController = {
+    // ============================ For post reports ============================
     postReport: async (req, res) => {
         const postID = req.params.id;
 
@@ -25,6 +21,7 @@ const repPostsController = {
             });
     },
 
+    // ============================ Confirming of post report ============================
     postConfirmReport: async (req, res) => {
         const postID = req.params.id;
         const repType = req.body.reportType;
@@ -51,6 +48,11 @@ const repPostsController = {
             vote: voteOfUser,
             msg: "Post reported! We will be reviewing it as soon as possible!"
         });
+    },
+
+    // ============================ Default redirections (URL reentering after Post) ============================
+    getPostDefault: (req, res) => {
+        res.redirect("/post/" + req.params.id);
     }
 }
 

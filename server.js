@@ -1,7 +1,6 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const fileUpload = require("express-fileupload");
-const bcrypt = require("bcryptjs");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const mongoURI = "mongodb://localhost:27017/memedia";
@@ -9,14 +8,6 @@ const mongoURI = "mongodb://localhost:27017/memedia";
 // Session
 const session = require("express-session");
 const MongoDBSession = require("connect-mongodb-session")(session);
-
-// Schemas
-const Comment = require("./models/comments.js");
-const Post = require("./models/posts.js");
-const RepComment = require("./models/reportComments.js");
-const RepPost = require("./models/reportPosts.js");
-const Vote = require("./models/votes.js");
-const User = require("./models/users.js");
 
 const app = express();
 

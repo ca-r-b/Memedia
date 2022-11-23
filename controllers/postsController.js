@@ -5,11 +5,11 @@ const RepComment = require("../models/reportComments");
 const RepPost = require("../models/reportPosts");
 const Vote = require("../models/votes");
 
-const bcrypt = require("bcryptjs");
 const fs = require("fs");
 const path = require('path');
 
 const postController = {
+    // ============================ Redirection to upload post page ============================
     getCreatePost: (req, res) => {
         if(req.session.isLoggedIn){
             return res.render("postCreate", {title: "Post Your Meme"});
@@ -18,6 +18,7 @@ const postController = {
         }
     },
 
+    // ============================ Adding of post to database ============================
     postUpload: async (req, res) => {
         // Fetch img
         var img = req.files.postImg;
@@ -49,6 +50,7 @@ const postController = {
         });
     },
 
+    // ============================ Post deleting ============================
     postDelete: async (req, res) => {
         const postID = req.params.id;
         const postHolder = await Post.findById(postID);
@@ -76,6 +78,7 @@ const postController = {
         });
     },
 
+    // ============================ Viewing of post ============================
     getPostView: async (req, res) => {
         const postID = req.params.id;
         const post = await Post.findById(postID);
@@ -141,27 +144,7 @@ const postController = {
         })
     },
 
-    postVote: async (req, res) => {
-        const postID = req.params.id;
-        const voter = req.session.username;
-        const action = req.body.voteBtn;
-
-        await Vote.updateOne({username: voter, postID: postID}, {$set: {vote: action}});
-
-        const upvCount = await Vote.count({postID: postID, vote: 1});
-        const dvCount = await Vote.count({postID: postID, vote: -1});
-        const postHolder = await Post.findById(postID);
-        
-        await Post.updateOne(
-            {username: postHolder.username, caption: postHolder.caption}, 
-            {$set: {
-                upvotes: upvCount,
-                downvotes: dvCount
-            }});
-
-        res.redirect("/post/" + postID);
-    },
-
+    // ============================ Post searching ============================
     postSearch: async (req, res) => {
         const searchInput = req.query.searchInput;
 
@@ -175,12 +158,9 @@ const postController = {
         })
     },
 
-    getDefault1: (req, res) => {
+    // ============================ Default redirections (URL reentering after Post) ============================
+    getPostDefault: (req, res) => {
         res.redirect("/home");
-    },
-
-    getDefault2: (req, res) => {
-        res.redirect("/post/" + req.params.id);
     }
 }
 
