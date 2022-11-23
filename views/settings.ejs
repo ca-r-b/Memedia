@@ -15,19 +15,23 @@
 
 <!-- Forms -->
 <div class="accSet-form-container">
-    <% if(msg !== ""){ %>
+    <% if(msg.includes("saved")){ %>
         <h4 class="msg-success"><%= msg %></h4>
+    <% } else if( msg !== ""){ %>
+        <h4 class="msg-fail"><%= msg %></h4>
     <% } %>
     <!-- Section 1 Container -->
     <div class="accSet-box">
         <div class="accSet-header">
-            <h2 id="accSetSec1">EMAIL ADDRESS</h2>
+            <h2 id="accSetSec1">USERNAME & EMAIL ADDRESS</h2>
             <p>
-                This information is private and will not be shared with other people.
+                Update your username to your liking. Also note that your email address will not be shared with other people.
             </p>
         </div>
         <div class="accSet-field">
-            <form action="/settings/updateEmail/<%= user.username %>" method="post">
+            <form action="/settings/updateUser/<%= user.username %>" method="post">
+                <label><b>USERNAME</b></label><br />
+                <input type="text" name="updUser" placeholder="Update Username. . ." value="<%= user.username %>" required><br />
                 <label><b>E-MAIL ADDRESS</b></label><br />
                 <input type="email" name="updEmail" placeholder="Update E-Mail Address. . ." value="<%= user.email %>" required>
                 <br/>
@@ -47,7 +51,7 @@
         <div class="accSet-field">
             <form action="/settings/updatePass/<%= user.username %>" method="post">
                 <label><b>PASSWORD</b></label><br />
-                <input type="password" name="updPass" placeholder="Update Password. . ." value="<%= user.password %>" minlength="8" maxlength="16" required>
+                <input type="password" name="updPass" placeholder="Update Password. . ." minlength="8" maxlength="16" required>
                 <br/>
                 <button type="submit">Save Changes</button>
             </form>

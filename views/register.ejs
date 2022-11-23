@@ -8,6 +8,11 @@
         <div class="register-title">
             <h1>Create an Account</h1>
             <hr/>
+            <% if(msg === "Account created successfully!"){ %>
+                <h4 style="color: rgb(17, 255, 0)"><%= msg %></h4>
+            <% } else if( msg !== ""){ %>
+                <h4 style="color: rgb(177, 0, 0)"><%= msg %></h4>
+            <% } %>
         </div>
         <!-- Sign In Fields -->
         <div class="register-form">

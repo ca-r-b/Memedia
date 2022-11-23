@@ -2,21 +2,21 @@
     <div class="profile-user-container">
         <div class="profile-header">
             <div class="profile-header-name">
-                <h1><b><%= users.username %></b></h1>
+                <h1><b><%= user.username %></b></h1>
             </div>
             <!-- TO-DO - DATABASE NEED: If profile is User's, show "Edit Profile"; If NOT User's own profile, REMOVE "Edit Profile" -->
             <div class="profile-header-btn">
-                <% if(users.username === session.username){%>
-                    <a href="/settings/<%= users.username %>"><button>Edit Profile</button></a>
+                <% if(user.username === session.username){%>
+                    <a href="/settings/<%= user.username %>"><button>Edit Profile</button></a>
                 <% } %>
             </div>
         </div>
         <div class="profile-image">
-            <img src="/images/pfps/<%= users.img %>"/>
+            <img src="/images/pfps/<%= user.img %>"/>
         </div>
         <div class="profile-bio">
             <h2><b>BIOGRAPHY</b></h2>
-            <p><%= users.bio %></p>
+            <p><%= user.bio %></p>
         </div>
     </div>
     <div class="profile-posts">
@@ -24,7 +24,6 @@
             <h2>Posts</h2>
             <hr/>
         </div>
-       <!-- TO-DO - DATABASE NEED: Make sure ALL posts of user is displayed here -->
         <% if (posts.length > 0) {%> 
             <% for(var i = 0; i < posts.length ; i++) {%> 
                 <%- include("./partials/postBox.ejs", {post: posts[i]}) %>

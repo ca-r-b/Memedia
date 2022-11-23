@@ -11,6 +11,13 @@ body{
     margin-bottom: 20px;
 }
 
+.msg-fail{
+    font-family: 'Concert One', cursive;
+    text-align: center; 
+    color: rgb(255, 90, 72);
+    margin-bottom: 20px;
+}
+
 /* =============== NAVIGATION BAR =============== */
 
 /* Nav Bar - Base */
@@ -143,6 +150,10 @@ body{
     margin-right: auto;
     height: 2px;
     width: 250px;
+}
+
+.register-title h4{
+    margin-bottom: -30px;
 }
 
 /* Register - Side Picture */
