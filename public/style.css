@@ -457,7 +457,7 @@ body{
     border-radius: 10px;
     padding: 20px;
     margin-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     margin-left: auto;
     margin-right: auto;
     width: 1000px;
@@ -516,6 +516,42 @@ body{
     transition: all 0.2s;
 }
 
+.aboutUs-PL{
+    background-color: rgba(255, 255, 255, 0.151);
+    border-radius: 10px;
+    padding: 4px;
+    max-width: 500px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.aboutUs-PL-packages, .aboutUs-PL-other{
+    font-size: 17px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.aboutUs-PL-packages h3, .aboutUs-PL-other h3{
+    color: #9A8C98;
+}
+
+.aboutUs-PL-packages ul{
+    list-style-type: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.aboutUs-PL-other p{
+    margin: 0;
+}
+
+.aboutUs-PL-other a{
+    color: white;
+    font-size: 17px;
+    transition: all 0.2s;
+}
 /* ========== ACCOUNT SETTINGS PAGE ========== */
 
 /* Account Settings - Field Form */
