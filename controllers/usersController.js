@@ -160,21 +160,15 @@ const userController = {
 
         if(searchUser){
             if(searchUser._id.toString() !== profileTemp._id.toString()){
-                console.log("usah")
                 validUser = false;
             }
         }
 
         if(searchEmail){
             if(searchEmail._id.toString() !== profileTemp._id.toString()){
-                console.log("keshi ---")
-                console.log("search: " + searchEmail._id)
-                console.log("profile: " + profileTemp._id)
                 validEmail = false;
             }
         }
-
-        console.log(validUser + " " + validEmail)
 
         // If user with "new username" does not exist / the user found is himself
         if(validUser){

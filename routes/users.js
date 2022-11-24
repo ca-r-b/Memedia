@@ -29,5 +29,4 @@ router.post("/settings/updateBio/:profileName", isAuth, userController.postUpdat
 // Redirection routes after reentering same URL
 router.get(["/settings/updateUser/:profileName", "/settings/updatePfp/:profileName", "/settings/updatePass/:profileName", "/settings/updateBio/:profileName"], isAuth, userController.getPostDefault);
 
-
 module.exports = router;

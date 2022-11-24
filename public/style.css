@@ -1148,6 +1148,11 @@ body{
     margin-bottom: 30px;
 }
 
+.profile-posts-none{
+    font-family: "Concert One", cursive;
+    text-align: center;
+}
+
 /* ==========  EDIT COMMENT ========== */
 
 .edit-comment-container{

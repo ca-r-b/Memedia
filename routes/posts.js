@@ -38,5 +38,4 @@ router.get("/search", postController.postSearch);
 router.get(["/postUpload", "/postDelete/:id"], isAuth, postController.getPostDefault);
 router.get("/confirmPostReport/:id", isAuth, repPostController.getPostDefault);
 
-
 module.exports = router;
