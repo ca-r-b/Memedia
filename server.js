@@ -16,10 +16,6 @@ const atlas = "mongodb+srv://memedia_database:" + process.env.ATLAS_PASSWORD + "
 const app = express();
 
 // Setup MongoDB Connection
-
-// mongoose.connect(mongoURI, {useNewUrlParser: true})
-//     .then((result) => console.log("Connected to DB!"))
-//     .catch((err) => console.log(err));
 mongoose.connect(atlas);
 
 const store = new MongoDBSession({
