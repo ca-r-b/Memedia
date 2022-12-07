@@ -16,14 +16,13 @@ const atlas = "mongodb+srv://memedia_database:" + process.env.ATLAS_PASSWORD + "
 const app = express();
 
 // Setup MongoDB Connection
+mongoose.set('strictQuery', true);
 mongoose.connect(atlas);
 
 const store = new MongoDBSession({
     uri: atlas,
     collection: "sessions"
 })
-
-mongoose.set('strictQuery', true);
 
 // Setup routes
 const authRouter = require("./routes/auth.js");
