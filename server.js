@@ -23,6 +23,8 @@ const store = new MongoDBSession({
     collection: "sessions"
 })
 
+mongoose.set('strictQuery', true);
+
 // Setup routes
 const authRouter = require("./routes/auth.js");
 const commentsRouter = require("./routes/comments.js");
