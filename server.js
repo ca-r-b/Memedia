@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const fileUpload = require("express-fileupload");
@@ -9,15 +11,19 @@ const mongoURI = "mongodb://localhost:27017/memedia";
 const session = require("express-session");
 const MongoDBSession = require("connect-mongodb-session")(session);
 
+const atlas = "mongodb+srv://memedia_database:" + process.env.ATLAS_PASSWORD + "@cluster0.skaff1k.mongodb.net/memedia"
+
 const app = express();
 
 // Setup MongoDB Connection
-mongoose.connect(mongoURI, {useNewUrlParser: true})
-    .then((result) => console.log("Connected to DB!"))
-    .catch((err) => console.log(err));
+
+// mongoose.connect(mongoURI, {useNewUrlParser: true})
+//     .then((result) => console.log("Connected to DB!"))
+//     .catch((err) => console.log(err));
+mongoose.connect(atlas);
 
 const store = new MongoDBSession({
-    uri: mongoURI,
+    uri: atlas,
     collection: "sessions"
 })
 
@@ -51,7 +57,7 @@ app.use((req, res, next) => {
     next();
 }); 
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log("Server now running on port 3000");
 });
 
