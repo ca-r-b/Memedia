@@ -1,6 +1,6 @@
 <div class="view-post-comment-user">
     <div class="view-post-comment-name">
-        <a href="#"><%= comment.username %></a>
+        <a href="/user/<%= comment.username %>"><%= comment.username %></a>
         <div class="view-post-comment-options">
             <%if(session.isLoggedIn){%>
                 <% if(session.username == comment.username){ %>
