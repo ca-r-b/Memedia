@@ -29,8 +29,6 @@ const postController = {
         // Redirect to upload folder
         await img.mv(path.resolve(__dirname + '/..', 'public/images/posts', imgName));
 
-        await console.log(path.resolve(__dirname + '/..', 'public/images/posts', imgName));
-
         const post = new Post({
             username: req.session.username,
             dateCreated: new Date(),
