@@ -5,9 +5,6 @@ Members:
 - BATAC, Carlo Antonio R.
 - BACAY, Mishi
 
-Description:
-- A simple web application for meme browsing. It makes use of MongoDB and JavaScript, while offering features such as user authentication, posting, and other CRUD operations.
-
 How to run Memedia LOCALLY:
 - Unzip the Memedia.zip.
 - Open command prompt (cmd).
