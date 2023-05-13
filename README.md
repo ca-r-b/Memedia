@@ -5,6 +5,8 @@ Members:
 - BATAC, Carlo Antonio R.
 - BACAY, Mishi
 
+Visit the website here: https://memedia.onrender.com/
+
 How to run Memedia LOCALLY:
 - Unzip the Memedia.zip.
 - Open command prompt (cmd).
